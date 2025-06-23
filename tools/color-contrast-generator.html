@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Contrast Generator Tool</title>
+    <title>Color Contrast Tool - Wichaksono</title>
+    <meta name="description" content="Tools untuk menguji kontras warna dan menemukan kombinasi warna yang aksesibel">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,195 +15,325 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --accent: #667eea;
+            --accent-hover: #5a67d8;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #79c0ff;
+            --border: #30363d;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --gradient: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
             min-height: 100vh;
-            padding: 20px;
+            transition: all 0.3s ease;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            padding: 2rem 1rem;
+            min-height: 100vh;
         }
 
         .header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            padding: 30px;
             text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            width: 50px;
+            height: 26px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 2px;
+        }
+
+        .theme-toggle::before {
+            content: '';
+            width: 18px;
+            height: 18px;
+            background: var(--accent);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            transform: translateX(0);
+        }
+
+        [data-theme="dark"] .theme-toggle::before {
+            transform: translateX(24px);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
             color: white;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: transform 0.3s ease;
         }
 
-        .header h1 {
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .title {
             font-size: 2.5rem;
-            margin-bottom: 10px;
             font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .header p {
+        .subtitle {
             font-size: 1.1rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
-        .main-content {
-            padding: 40px;
+        .description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .mode-selector {
             display: flex;
-            gap: 20px;
-            margin-bottom: 40px;
+            gap: 1rem;
+            margin-bottom: 2rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .mode-btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: #f8f9fa;
-            color: #495057;
-            min-width: 200px;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+            min-width: 220px;
+        }
+
+        .mode-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: -1;
         }
 
         .mode-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: var(--accent);
             color: white;
+        }
+
+        .mode-btn.active::before {
+            left: 0;
+            opacity: 1;
+        }
+
+        .mode-btn:hover:not(.active) {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 25px var(--shadow);
         }
 
         .input-section {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
         }
 
         .input-group {
             display: flex;
-            gap: 15px;
+            gap: 1rem;
             align-items: center;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
         .input-group label {
             font-weight: 600;
-            color: #495057;
-            min-width: 120px;
+            color: var(--text-primary);
+            min-width: 140px;
         }
 
         .color-input-wrapper {
-            position: relative;
             display: flex;
-            gap: 10px;
+            gap: 1rem;
             align-items: center;
         }
 
         .color-picker {
             width: 60px;
             height: 45px;
-            border: none;
+            border: 2px solid var(--border);
             border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .color-picker:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px var(--shadow);
         }
 
         .hex-input {
             padding: 12px 15px;
-            border: 2px solid #e9ecef;
+            border: 2px solid var(--border);
             border-radius: 10px;
             font-size: 1rem;
             width: 150px;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-family: 'Inter', monospace;
         }
 
         .hex-input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--accent);
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .generate-btn {
             padding: 12px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient);
             color: white;
             border: none;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .generate-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--shadow);
         }
 
         .results {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
         .color-recommendation {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .color-recommendation:hover {
-            transform: translateY(-5px);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--shadow);
+            border-color: var(--accent);
         }
 
         .color-preview {
-            height: 100px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            height: 80px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem;
             position: relative;
             overflow: hidden;
+            border: 1px solid var(--border);
         }
 
         .color-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 0.75rem;
         }
 
         .hex-code {
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            padding: 5px 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
         }
 
         .hex-code:hover {
-            background: #e9ecef;
+            background: var(--accent);
+            color: white;
+            transform: scale(1.05);
         }
 
         .contrast-ratio {
             font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
             color: white;
+            font-size: 0.9rem;
         }
 
         .contrast-excellent {
@@ -216,16 +350,16 @@
         }
 
         .wcag-info {
-            font-size: 0.9rem;
-            color: #6c757d;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
             display: flex;
-            gap: 15px;
+            gap: 0.75rem;
         }
 
         .wcag-badge {
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
             font-weight: 600;
         }
 
@@ -243,32 +377,116 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #28a745;
+            background: var(--accent);
             color: white;
-            padding: 15px 20px;
+            padding: 1rem 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px var(--shadow);
             transform: translateX(400px);
             transition: transform 0.3s ease;
             z-index: 1000;
+            font-weight: 500;
         }
 
         .toast.show {
             transform: translateX(0);
         }
 
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .color-recommendation {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .color-recommendation:nth-child(1) { animation-delay: 0.1s; }
+        .color-recommendation:nth-child(2) { animation-delay: 0.15s; }
+        .color-recommendation:nth-child(3) { animation-delay: 0.2s; }
+        .color-recommendation:nth-child(4) { animation-delay: 0.25s; }
+        .color-recommendation:nth-child(5) { animation-delay: 0.3s; }
+        .color-recommendation:nth-child(6) { animation-delay: 0.35s; }
+        .color-recommendation:nth-child(7) { animation-delay: 0.4s; }
+        .color-recommendation:nth-child(8) { animation-delay: 0.45s; }
+        .color-recommendation:nth-child(9) { animation-delay: 0.5s; }
+        .color-recommendation:nth-child(10) { animation-delay: 0.55s; }
+        .color-recommendation:nth-child(11) { animation-delay: 0.6s; }
+        .color-recommendation:nth-child(12) { animation-delay: 0.65s; }
+
         @media (max-width: 768px) {
+            .container {
+                padding: 1rem 0.75rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
             .mode-selector {
                 flex-direction: column;
+                align-items: center;
+            }
+
+            .mode-btn {
+                min-width: 280px;
             }
 
             .input-group {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
+                text-align: center;
+            }
+
+            .input-group label {
+                min-width: auto;
             }
 
             .results {
                 grid-template-columns: 1fr;
+            }
+
+            .color-info {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .wcag-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .title {
+                font-size: 1.75rem;
+            }
+
+            .color-input-wrapper {
+                flex-direction: column;
+                gap: 0.75rem;
             }
         }
     </style>
@@ -276,43 +494,76 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎨 Color Contrast Tool</h1>
-            <p>Temukan kombinasi warna yang kontras dan aksesibel</p>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <div class="logo">🎨</div>
+            <h1 class="title">Color Contrast Tool</h1>
+            <p class="subtitle">by Wichaksono</p>
+            <p class="description">Temukan kombinasi warna yang kontras dan aksesibel sesuai standar WCAG untuk desain web yang lebih baik</p>
         </div>
 
-        <div class="main-content">
-            <div class="mode-selector">
-                <button class="mode-btn active" data-mode="background">
-                    Cari Foreground untuk Background
-                </button>
-                <button class="mode-btn" data-mode="foreground">
-                    Cari Background untuk Foreground
-                </button>
-            </div>
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="background">
+                🎯 Cari Foreground untuk Background
+            </button>
+            <button class="mode-btn" data-mode="foreground">
+                🎨 Cari Background untuk Foreground
+            </button>
+        </div>
 
-            <div class="input-section">
-                <div class="input-group">
-                    <label id="input-label">Warna Background:</label>
-                    <div class="color-input-wrapper">
-                        <input type="color" class="color-picker" id="colorPicker" value="#3498db">
-                        <input type="text" class="hex-input" id="hexInput" placeholder="#3498db" value="#3498db">
-                        <button class="generate-btn" onclick="generateRecommendations()">
-                            Generate
-                        </button>
-                    </div>
+        <div class="input-section">
+            <div class="input-group">
+                <label id="input-label">Warna Background:</label>
+                <div class="color-input-wrapper">
+                    <input type="color" class="color-picker" id="colorPicker" value="#667eea">
+                    <input type="text" class="hex-input" id="hexInput" placeholder="#667eea" value="#667eea">
+                    <button class="generate-btn" onclick="generateRecommendations()">
+                        Generate
+                    </button>
                 </div>
             </div>
+        </div>
 
-            <div class="results" id="results"></div>
+        <div class="results" id="results"></div>
+
+        <div class="footer">
+            <p>© 2025 Color Contrast Tool by <strong>Wichaksono</strong>. Built with ❤️</p>
         </div>
     </div>
 
     <div class="toast" id="toast">
-        Kode warna berhasil disalin!
+        Kode warna berhasil disalin! ✓
     </div>
 
     <script>
         let currentMode = 'background';
+        
+        // Theme toggle functionality
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Initialize theme
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+
+        // Initialize theme on load
+        initTheme();
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
         
         // Event listeners
         document.querySelectorAll('.mode-btn').forEach(btn => {
