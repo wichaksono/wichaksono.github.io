@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Contrast Generator Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            color: #495057;
+            min-width: 200px;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: #495057;
+            min-width: 120px;
+        }
+
+        .color-input-wrapper {
+            position: relative;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .color-picker {
+            width: 60px;
+            height: 45px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hex-input {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            width: 150px;
+            transition: border-color 0.3s ease;
+        }
+
+        .hex-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .generate-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .color-recommendation {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .color-recommendation:hover {
+            transform: translateY(-5px);
+        }
+
+        .color-preview {
+            height: 100px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .hex-code {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            padding: 5px 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .hex-code:hover {
+            background: #e9ecef;
+        }
+
+        .contrast-ratio {
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .contrast-excellent {
+            background: #28a745;
+        }
+
+        .contrast-good {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .contrast-poor {
+            background: #dc3545;
+        }
+
+        .wcag-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+            display: flex;
+            gap: 15px;
+        }
+
+        .wcag-badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .wcag-pass {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .wcag-fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .mode-selector {
+                flex-direction: column;
+            }
+
+            .input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .results {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Color Contrast Tool</h1>
+            <p>Temukan kombinasi warna yang kontras dan aksesibel</p>
+        </div>
+
+        <div class="main-content">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="background">
+                    Cari Foreground untuk Background
+                </button>
+                <button class="mode-btn" data-mode="foreground">
+                    Cari Background untuk Foreground
+                </button>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label id="input-label">Warna Background:</label>
+                    <div class="color-input-wrapper">
+                        <input type="color" class="color-picker" id="colorPicker" value="#3498db">
+                        <input type="text" class="hex-input" id="hexInput" placeholder="#3498db" value="#3498db">
+                        <button class="generate-btn" onclick="generateRecommendations()">
+                            Generate
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results" id="results"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        Kode warna berhasil disalin!
+    </div>
+
+    <script>
+        let currentMode = 'background';
+        
+        // Event listeners
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentMode = e.target.dataset.mode;
+                updateLabels();
+                generateRecommendations();
+            });
+        });
+
+        document.getElementById('colorPicker').addEventListener('input', (e) => {
+            document.getElementById('hexInput').value = e.target.value;
+            generateRecommendations();
+        });
+
+        document.getElementById('hexInput').addEventListener('input', (e) => {
+            const hex = e.target.value;
+            if (isValidHex(hex)) {
+                document.getElementById('colorPicker').value = hex;
+                generateRecommendations();
+            }
+        });
+
+        function updateLabels() {
+            const label = document.getElementById('input-label');
+            if (currentMode === 'background') {
+                label.textContent = 'Warna Background:';
+            } else {
+                label.textContent = 'Warna Foreground:';
+            }
+        }
+
+        function isValidHex(hex) {
+            return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex);
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        }
+
+        function getLuminance(r, g, b) {
+            const [rs, gs, bs] = [r, g, b].map(c => {
+                c = c / 255;
+                return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+            });
+            return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+        }
+
+        function getContrastRatio(color1, color2) {
+            const rgb1 = hexToRgb(color1);
+            const rgb2 = hexToRgb(color2);
+            
+            const lum1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
+            const lum2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);
+            
+            const brightest = Math.max(lum1, lum2);
+            const darkest = Math.min(lum1, lum2);
+            
+            return (brightest + 0.05) / (darkest + 0.05);
+        }
+
+        function generateContrastingColors(baseColor, mode) {
+            const colors = [];
+            const baseRgb = hexToRgb(baseColor);
+            const baseLum = getLuminance(baseRgb.r, baseRgb.g, baseRgb.b);
+            
+            // Warna dasar
+            const baseColors = [
+                '#FFFFFF', '#000000', '#333333', '#666666', '#999999', '#CCCCCC',
+                '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF',
+                '#800000', '#008000', '#000080', '#808000', '#800080', '#008080',
+                '#C0C0C0', '#808080', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4',
+                '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F', '#AED6F1', '#F8C471'
+            ];
+
+            // Generate variasi untuk setiap warna dasar
+            baseColors.forEach(color => {
+                const contrastRatio = getContrastRatio(baseColor, color);
+                if (contrastRatio >= 3) { // Minimal kontras yang dapat diterima
+                    colors.push({
+                        hex: color,
+                        contrast: contrastRatio
+                    });
+                }
+            });
+
+            // Generate warna gradasi
+            for (let i = 0; i < 20; i++) {
+                let r, g, b;
+                
+                if (baseLum > 0.5) {
+                    // Jika base color terang, generate warna gelap
+                    r = Math.floor(Math.random() * 100);
+                    g = Math.floor(Math.random() * 100);
+                    b = Math.floor(Math.random() * 100);
+                } else {
+                    // Jika base color gelap, generate warna terang
+                    r = Math.floor(200 + Math.random() * 55);
+                    g = Math.floor(200 + Math.random() * 55);
+                    b = Math.floor(200 + Math.random() * 55);
+                }
+                
+                const hex = rgbToHex(r, g, b);
+                const contrastRatio = getContrastRatio(baseColor, hex);
+                
+                if (contrastRatio >= 3) {
+                    colors.push({
+                        hex: hex,
+                        contrast: contrastRatio
+                    });
+                }
+            }
+
+            // Hapus duplikat dan urutkan berdasarkan kontras
+            const uniqueColors = colors.filter((color, index, self) => 
+                index === self.findIndex(c => c.hex === color.hex)
+            );
+            
+            return uniqueColors
+                .sort((a, b) => b.contrast - a.contrast)
+                .slice(0, 12); // Ambil 12 rekomendasi terbaik
+        }
+
+        function generateRecommendations() {
+            const hexInput = document.getElementById('hexInput').value;
+            if (!isValidHex(hexInput)) return;
+
+            const recommendations = generateContrastingColors(hexInput, currentMode);
+            displayRecommendations(hexInput, recommendations);
+        }
+
+        function displayRecommendations(baseColor, recommendations) {
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+
+            recommendations.forEach(rec => {
+                const card = document.createElement('div');
+                card.className = 'color-recommendation';
+                
+                const bgColor = currentMode === 'background' ? baseColor : rec.hex;
+                const textColor = currentMode === 'background' ? rec.hex : baseColor;
+                
+                const contrastLevel = rec.contrast >= 7 ? 'excellent' : 
+                                    rec.contrast >= 4.5 ? 'good' : 'poor';
+                
+                const wcagAA = rec.contrast >= 4.5;
+                const wcagAAA = rec.contrast >= 7;
+
+                card.innerHTML = `
+                    <div class="color-preview" style="background-color: ${bgColor}; color: ${textColor};">
+                        Sample Text Preview
+                    </div>
+                    <div class="color-info">
+                        <span class="hex-code" onclick="copyToClipboard('${rec.hex}')">${rec.hex}</span>
+                        <span class="contrast-ratio contrast-${contrastLevel}">
+                            ${rec.contrast.toFixed(2)}:1
+                        </span>
+                    </div>
+                    <div class="wcag-info">
+                        <span class="wcag-badge ${wcagAA ? 'wcag-pass' : 'wcag-fail'}">
+                            WCAG AA ${wcagAA ? '✓' : '✗'}
+                        </span>
+                        <span class="wcag-badge ${wcagAAA ? 'wcag-pass' : 'wcag-fail'}">
+                            WCAG AAA ${wcagAAA ? '✓' : '✗'}
+                        </span>
+                    </div>
+                `;
+                
+                resultsContainer.appendChild(card);
+            });
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast();
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // Generate initial recommendations
+        generateRecommendations();
+    </script>
+</body>
+</html>
