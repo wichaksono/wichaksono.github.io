@@ -52,6 +52,14 @@
         .navbar-dark .navbar-toggler {
             border-color: var(--border);
         }
+        
+        .navbar-dark .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        
+        [data-bs-theme="dark"] .navbar-dark .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
 
         .card {
             background-color: var(--bg-secondary);
@@ -238,8 +246,9 @@
                 <i class="fas fa-blog me-2"></i>Blog Kita
             </a>
             
-            <div class="d-flex align-items-center">
-                <button class="theme-toggle me-3" onclick="toggleTheme()" title="Toggle Dark Mode">
+            <!-- Mobile: Theme/Search on left, Toggle button on right -->
+            <div class="d-flex align-items-center d-lg-none">
+                <button class="theme-toggle me-2" onclick="toggleTheme()" title="Toggle Dark Mode">
                     <i class="fas fa-moon" id="theme-icon"></i>
                 </button>
                 <button class="btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#searchModal">
@@ -250,6 +259,7 @@
                 </button>
             </div>
 
+            <!-- Desktop: Navigation in center, Theme/Search on right -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
@@ -258,6 +268,14 @@
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
+                <div class="d-flex align-items-center">
+                    <button class="theme-toggle me-2" onclick="toggleTheme()" title="Toggle Dark Mode">
+                        <i class="fas fa-moon" id="theme-icon-desktop"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#searchModal">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -510,7 +528,7 @@
                 </div>
 
                 <!-- Load More Button -->
-                <div class="text-center my-4">
+                <div class="text-center mt-4">
                     <button class="btn btn-outline-primary btn-lg">Load More Posts</button>
                 </div>
             </div>
@@ -639,14 +657,17 @@
         function toggleTheme() {
             const html = document.documentElement;
             const themeIcon = document.getElementById('theme-icon');
+            const themeIconDesktop = document.getElementById('theme-icon-desktop');
             
             if (html.getAttribute('data-bs-theme') === 'dark') {
                 html.setAttribute('data-bs-theme', 'light');
-                themeIcon.className = 'fas fa-moon';
+                if (themeIcon) themeIcon.className = 'fas fa-moon';
+                if (themeIconDesktop) themeIconDesktop.className = 'fas fa-moon';
                 localStorage.setItem('theme', 'light');
             } else {
                 html.setAttribute('data-bs-theme', 'dark');
-                themeIcon.className = 'fas fa-sun';
+                if (themeIcon) themeIcon.className = 'fas fa-sun';
+                if (themeIconDesktop) themeIconDesktop.className = 'fas fa-sun';
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -656,12 +677,15 @@
             const savedTheme = localStorage.getItem('theme') || 'light';
             const html = document.documentElement;
             const themeIcon = document.getElementById('theme-icon');
+            const themeIconDesktop = document.getElementById('theme-icon-desktop');
             
             html.setAttribute('data-bs-theme', savedTheme);
             if (savedTheme === 'dark') {
-                themeIcon.className = 'fas fa-sun';
+                if (themeIcon) themeIcon.className = 'fas fa-sun';
+                if (themeIconDesktop) themeIconDesktop.className = 'fas fa-sun';
             } else {
-                themeIcon.className = 'fas fa-moon';
+                if (themeIcon) themeIcon.className = 'fas fa-moon';
+                if (themeIconDesktop) themeIconDesktop.className = 'fas fa-moon';
             }
         });
 
