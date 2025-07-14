@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Semantic - Simple & Clean</title>
+    <meta name="description" content="Blog sederhana dan bersih dengan desain semantic yang SEO friendly">
+    <meta name="keywords" content="blog, artikel, berita, teknologi">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --dark-bg: #212529;
+            --dark-card: #343a40;
+        }
+
+        [data-bs-theme="dark"] {
+            --bs-body-bg: var(--dark-bg);
+            --bs-body-color: #fff;
+        }
+
+        /* Sticky Ads Overflow */
+        .sticky-ads {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 325px;
+            background: #adb5bd;
+            color: #343a40;
+            z-index: 1040;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .sticky-ads.hidden {
+            transform: translateY(-100%);
+        }
+
+        .sticky-ads .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #343a40;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Clean button styles for navbar icons */
+        .btn-clean {
+            background: none !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            color: inherit;
+            padding: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-clean:hover {
+            background: none !important;
+            border: none !important;
+            color: var(--primary-color);
+        }
+
+        .btn-clean:focus {
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        /* Body padding for sticky ads */
+        body {
+            padding-top: 325px;
+            transition: padding-top 0.3s ease;
+        }
+
+        body.ads-hidden {
+            padding-top: 0;
+        }
+
+        /* Sticky Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        [data-bs-theme="dark"] .navbar {
+            background: rgba(33, 37, 41, 0.95) !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 60px 0;
+        }
+
+        [data-bs-theme="dark"] .hero-section {
+            background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+        }
+
+        .featured-post {
+            background: white;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            height: 300px;
+        }
+
+        [data-bs-theme="dark"] .featured-post {
+            background: var(--dark-card);
+        }
+
+        .featured-post:hover {
+            transform: translateY(-5px);
+        }
+
+        .featured-post-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 4rem;
+        }
+
+        .featured-post-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            z-index: 2;
+        }
+
+        .featured-post-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .featured-post-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+            color: white;
+            line-height: 1.3;
+        }
+
+        /* Post Cards */
+        .post-card {
+            background: white;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        [data-bs-theme="dark"] .post-card {
+            background: var(--dark-card);
+        }
+
+        .post-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .post-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+        }
+
+        .sidebar-widget {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        [data-bs-theme="dark"] .sidebar-widget {
+            background: var(--dark-card);
+        }
+
+        .widget-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Ads Banner */
+        .ads-banner {
+            background: #adb5bd;
+            color: #343a40;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        /* Remove rounded corners from badges */
+        .badge {
+            border-radius: 0 !important;
+        }
+
+        .footer {
+            background: #343a40;
+            color: #adb5bd;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer a {
+            color: #adb5bd;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer .brand-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .social-icons a {
+            color: #adb5bd;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: white;
+        }
+
+        /* Fix text muted visibility in light mode */
+        .text-muted {
+            color: #6c757d !important;
+        }
+
+        [data-bs-theme="dark"] .text-muted {
+            color: #adb5bd !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: static;
+                margin-top: 2rem;
+            }
+            
+            .sticky-ads {
+                height: 250px;
+            }
+            
+            body {
+                padding-top: 250px;
+            }
+
+            /* Featured posts mobile carousel */
+            #featuredPosts .col-lg-4:nth-child(n+2) {
+                display: none;
+            }
+
+            #featuredPosts.carousel-active .col-lg-4 {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Ads Overflow -->
+    <div class="sticky-ads" id="stickyAds" style="background: #adb5bd; color: #343a40;">
+        <div class="text-center">
+            <div style="font-weight: 500;">Ads 1200 X 325 px</div>
+        </div>
+        <button class="close-btn" onclick="hideAds()" style="color: #343a40;">&times;</button>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-journal-text"></i> BlogSemantic
+            </a>
+            
+            <!-- Desktop & Tablet Menu -->
+            <div class="d-none d-lg-flex align-items-center">
+                <nav class="navbar-nav me-4">
+                    <a class="nav-link" href="#">Beranda</a>
+                    <a class="nav-link" href="#">Artikel</a>
+                    <a class="nav-link" href="#">Kategori</a>
+                    <a class="nav-link" href="#">Tentang</a>
+                    <a class="nav-link" href="#">Kontak</a>
+                </nav>
+                
+                <button class="btn-clean me-2" id="darkModeToggle">
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+                
+                <button class="btn-clean" data-bs-toggle="modal" data-bs-target="#searchModal">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="d-flex d-lg-none align-items-center">
+                <button class="btn-clean me-2" id="darkModeToggleMobile">
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+                
+                <button class="btn-clean me-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+                    <i class="bi bi-search"></i>
+                </button>
+                
+                <button class="btn-clean" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <form class="p-4">
+                        <div class="mb-0">
+                            <input type="text" class="form-control form-control-lg border-0" placeholder="Ketik kata kunci pencarian..." autofocus>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <nav class="nav flex-column">
+                <a class="nav-link" href="#"><i class="bi bi-house"></i> Beranda</a>
+                <a class="nav-link" href="#"><i class="bi bi-newspaper"></i> Artikel</a>
+                <a class="nav-link" href="#"><i class="bi bi-tags"></i> Kategori</a>
+                <a class="nav-link" href="#"><i class="bi bi-person"></i> Tentang</a>
+                <a class="nav-link" href="#"><i class="bi bi-envelope"></i> Kontak</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">            
+            <div class="row" id="featuredPosts">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <article class="featured-post">
+                        <div class="featured-post-img">
+                            <i class="bi bi-image"></i>
+                        </div>
+                        <div class="featured-post-overlay">
+                            <div class="featured-post-meta">
+                                <span class="badge bg-primary">Tutorial</span>
+                                <small class="text-white-50">2 hari lalu</small>
+                            </div>
+                            <h3 class="featured-post-title">Panduan Lengkap Semantic HTML</h3>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <article class="featured-post">
+                        <div class="featured-post-img">
+                            <i class="bi bi-code-slash"></i>
+                        </div>
+                        <div class="featured-post-overlay">
+                            <div class="featured-post-meta">
+                                <span class="badge bg-success">Web Dev</span>
+                                <small class="text-white-50">3 hari lalu</small>
+                            </div>
+                            <h3 class="featured-post-title">Bootstrap 5 Tanpa jQuery</h3>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <article class="featured-post">
+                        <div class="featured-post-img">
+                            <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <div class="featured-post-overlay">
+                            <div class="featured-post-meta">
+                                <span class="badge bg-warning">Performance</span>
+                                <small class="text-white-50">5 hari lalu</small>
+                            </div>
+                            <h3 class="featured-post-title">Optimasi Kecepatan Website</h3>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ads Banner -->
+    <div class="container">
+        <div class="ads-banner">
+            Ads 728 X 90 px
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Latest Posts -->
+            <div class="col-lg-8">
+                <h2 class="h3 mb-4">Latest Posts</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <article class="post-card">
+                            <div class="post-img">
+                                <i class="bi bi-file-text" style="font-size: 2rem;"></i>
+                            </div>
+                            <div class="p-3">
+                                <span class="badge bg-info mb-2">CSS</span>
+                                <h3 class="h6 mb-2">Mengenal CSS Grid Layout</h3>
+                                <p class="text-muted small mb-3">CSS Grid adalah sistem layout dua dimensi yang powerful...</p>
+                                <small class="text-muted">oleh Admin • 1 minggu lalu</small>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <article class="post-card">
+                            <div class="post-img">
+                                <i class="bi bi-phone" style="font-size: 2rem;"></i>
+                            </div>
+                            <div class="p-3">
+                                <span class="badge bg-secondary mb-2">Design</span>
+                                <h3 class="h6 mb-2">Responsive Design Principles</h3>
+                                <p class="text-muted small mb-3">Prinsip-prinsip dasar dalam membuat desain responsif...</p>
+                                <small class="text-muted">oleh Sarah • 1 minggu lalu</small>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <article class="post-card">
+                            <div class="p-3">
+                                <span class="badge bg-success mb-2">SEO</span>
+                                <h3 class="h6 mb-2">SEO untuk Developer</h3>
+                                <p class="text-muted small mb-3">Panduan SEO teknis yang harus dipahami developer...</p>
+                                <small class="text-muted">oleh John • 2 minggu lalu</small>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <article class="post-card">
+                            <div class="p-3">
+                                <span class="badge bg-danger mb-2">Security</span>
+                                <h3 class="h6 mb-2">Web Security Best Practices</h3>
+                                <p class="text-muted small mb-3">Praktik terbaik untuk keamanan aplikasi web...</p>
+                                <small class="text-muted">oleh Mike • 2 minggu lalu</small>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <article class="post-card">
+                            <div class="p-3">
+                                <span class="badge bg-dark mb-2">Git</span>
+                                <h3 class="h6 mb-2">Git Workflow untuk Tim</h3>
+                                <p class="text-muted small mb-3">Strategi Git workflow yang efektif untuk kolaborasi tim...</p>
+                                <small class="text-muted">oleh Alex • 3 minggu lalu</small>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <article class="post-card">
+                            <div class="p-3">
+                                <span class="badge bg-warning mb-2">Database</span>
+                                <h3 class="h6 mb-2">Database Optimization</h3>
+                                <p class="text-muted small mb-3">Teknik optimasi database untuk performa maksimal...</p>
+                                <small class="text-muted">oleh David • 3 minggu lalu</small>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <!-- Ads Widget -->
+                    <div class="text-center mb-4" style="background: #adb5bd; color: #343a40; padding: 4rem 0; font-weight: 500;">
+                        Ads 300 X 250 px
+                    </div>
+
+                    <!-- Popular Posts -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Popular Posts</h4>
+                        <div class="mb-3">
+                            <h6 class="mb-1">JavaScript Modern</h6>
+                            <small class="text-muted">1,234 views</small>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="mb-1">React Hooks Guide</h6>
+                            <small class="text-muted">987 views</small>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="mb-1">CSS Flexbox</h6>
+                            <small class="text-muted">756 views</small>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="mb-1">Node.js Performance</h6>
+                            <small class="text-muted">642 views</small>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Vue.js Components</h6>
+                            <small class="text-muted">521 views</small>
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Kategori</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <a href="#" class="text-decoration-none">Web Development</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="#" class="text-decoration-none">Design</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="#" class="text-decoration-none">SEO</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="#" class="text-decoration-none">Security</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-decoration-none">Tools</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Brand and Quick Menu -->
+            <div class="row mb-4 pb-4" style="border-bottom: 2px solid #495057;">
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <h4 class="brand-title"><i class="bi bi-journal-text"></i> BlogSemantic</h4>
+                </div>
+                <div class="col-lg-6 col-md-6 mb-4 d-flex align-items-center justify-content-lg-end">
+                    <nav class="d-flex flex-wrap gap-3">
+                        <a href="#" class="text-decoration-none">Beranda</a>
+                        <a href="#" class="text-decoration-none">Artikel</a>
+                        <a href="#" class="text-decoration-none">Kategori</a>
+                        <a href="#" class="text-decoration-none">Tentang</a>
+                        <a href="#" class="text-decoration-none">Kontak</a>
+                        <a href="#" class="text-decoration-none">Privacy</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Footer Links -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">About Us</h5>
+                    <p class="text-muted mb-3">Platform berbagi pengetahuan teknologi dan programming dengan konten berkualitas tinggi.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Kategori</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">SEO</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Database</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Halaman</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Semua Artikel</a></li>
+                        <li><a href="#">Penulis</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Kontak</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> info@blogsemantic.com</li>
+                        <li class="mb-2"><i class="bi bi-phone me-2"></i> +62 123 456 789</li>
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> Jakarta, Indonesia</li>
+                        <li><i class="bi bi-clock me-2"></i> Mon - Fri, 9AM - 6PM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-muted mb-0">&copy; 2025 BlogSemantic. All rights reserved. | <a href="#" class="text-muted">Privacy Policy</a> | <a href="#" class="text-muted">Terms of Service</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            html.setAttribute('data-bs-theme', savedTheme);
+            updateToggleIcon(savedTheme);
+        }
+        
+        function toggleDarkMode() {
+            const currentTheme = html.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleIcon(newTheme);
+        }
+        
+        // Add null checks for dark mode toggles
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+        }
+        if (darkModeToggleMobile) {
+            darkModeToggleMobile.addEventListener('click', toggleDarkMode);
+        }
+        
+        function updateToggleIcon(theme) {
+            if (darkModeToggle) {
+                const iconDesktop = darkModeToggle.querySelector('i');
+                if (iconDesktop) {
+                    iconDesktop.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+                }
+            }
+            
+            if (darkModeToggleMobile) {
+                const iconMobile = darkModeToggleMobile.querySelector('i');
+                if (iconMobile) {
+                    iconMobile.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+                }
+            }
+        }
+        
+        // Sticky Ads Hide on Scroll
+        let lastScrollTop = 0;
+        const stickyAds = document.getElementById('stickyAds');
+        const body = document.body;
+        
+        function hideAds() {
+            if (stickyAds) {
+                stickyAds.classList.add('hidden');
+            }
+            if (body) {
+                body.classList.add('ads-hidden');
+            }
+        }
+        
+        window.addEventListener('scroll', function() {
+            if (!stickyAds || !body) return;
+            
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                stickyAds.classList.add('hidden');
+                body.classList.add('ads-hidden');
+            } else if (scrollTop < lastScrollTop && scrollTop < 50) {
+                // Scrolling up
+                stickyAds.classList.remove('hidden');
+                body.classList.remove('ads-hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Featured Posts Mobile Carousel - Simple approach
+        function initMobileCarousel() {
+            const featuredPosts = document.getElementById('featuredPosts');
+            if (!featuredPosts) return;
+            
+            if (window.innerWidth <= 768) {
+                // Add carousel classes and controls for mobile
+                featuredPosts.classList.add('carousel', 'slide', 'carousel-active');
+                featuredPosts.setAttribute('data-bs-ride', 'carousel');
+                featuredPosts.setAttribute('id', 'featuredCarousel');
+                
+                // Add carousel controls if not exist
+                if (!featuredPosts.querySelector('.carousel-control-prev')) {
+                    featuredPosts.innerHTML += `
+                        <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    `;
+                }
+            } else {
+                // Remove carousel classes for desktop/tablet
+                featuredPosts.classList.remove('carousel', 'slide', 'carousel-active');
+                featuredPosts.removeAttribute('data-bs-ride');
+                
+                // Remove carousel controls
+                const controls = featuredPosts.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+                controls.forEach(control => control.remove());
+            }
+        }
+        
+        // Initialize on load and resize with delay to ensure DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initMobileCarousel();
+        });
+        
+        window.addEventListener('resize', initMobileCarousel);
+    </script>
+</body>
+</html>
