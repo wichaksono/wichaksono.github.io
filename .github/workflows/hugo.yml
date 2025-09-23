@@ -32,5 +32,5 @@ jobs:
           external_repository: ${{ github.repository }}
           publish_dir: ./public
           publish_branch: gh-pages
-          user_name: 'Your Name'
-          user_email: 'your-email@example.com'
+          user_name: 'Wakhid Wicaksono'
+          user_email: 'wichaksono.w@gmail.com'
