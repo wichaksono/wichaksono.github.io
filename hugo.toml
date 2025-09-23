@@ -1,0 +1,4 @@
+baseURL = 'https://wichaksono.github.io/'
+languageCode = 'en-us'
+title = 'Wichaksono | Hugo Site'
+theme = "keepit"
