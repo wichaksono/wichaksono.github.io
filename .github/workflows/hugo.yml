@@ -13,8 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          submodules: true
-          fetch-depth: 0
+          fetch-depth: 0   # jangan pakai submodules
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -29,7 +28,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
-          external_repository: ${{ github.repository }}
           publish_dir: ./public
           publish_branch: gh-pages
           user_name: 'Wakhid Wicaksono'
