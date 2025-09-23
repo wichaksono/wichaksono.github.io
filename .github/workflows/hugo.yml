@@ -32,3 +32,4 @@ jobs:
           publish_branch: gh-pages
           user_name: 'Wakhid Wicaksono'
           user_email: 'wichaksono.w@gmail.com'
+          force_nojekyll: true
