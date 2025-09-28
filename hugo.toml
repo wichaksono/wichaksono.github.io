@@ -1,6 +1,6 @@
 baseURL = 'https://wichaksono.github.io/'
 languageCode = 'en-us'
-title = 'Wichaksono | Hugo Site'
+title = 'Wichaksono | Web Developer'
 theme = "keepit"
 
 # default amount of posts in each pages
@@ -15,9 +15,9 @@ copyright = ""
     # URL of the LOGO
     logo = ""
     # title name
-    name = "KeepIt"
+    name = "Wichaksono | Web Developer"
     # you can add extra information before the name (HTML format is supported), such as icons
-    pre = "<i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i>"
+    pre = "<i class='fa-solid fa-terminal'></i>"
     # you can add extra information after the name (HTML format is supported), such as icons
     post = ""
     # whether to use typeit animation for title name
@@ -27,6 +27,22 @@ copyright = ""
 [menu]
   [[menu.main]]
     weight = 1
+    identifier = ""
+    pre = ""
+    post = ""
+    name = "My Portfolio"
+    url = "https://github.com/wichaksono"
+    title = "My Portfolio"
+  [[menu.main]]
+    weight = 2
+    identifier = "about"
+    pre = ""
+    post = ""
+    name = "About"
+    url = "/about"
+    title = "About"
+ [[menu.main]]
+    weight = 3
     identifier = "posts"
     # you can add extra information before the name (HTML format is supported), such as icons
     pre = ""
@@ -36,14 +52,7 @@ copyright = ""
     url = "/posts/"
     # title will be shown when you hover on this menu link
     title = ""
-  [[menu.main]]
-    weight = 3
-    identifier = "categories"
-    pre = ""
-    post = ""
-    name = "Categories"
-    url = "/categories/"
-    title = ""
+  
 
 # Home page config
   [params.home]
@@ -78,3 +87,21 @@ copyright = ""
     Facebook = "#"
     Telegram = "#"
     Whatsapp = "#"
+
+# Footer config
+  [params.footer]
+    enable = true
+    # Custom content (HTML format is supported)
+    custom = ""
+    # whether to show Hugo and theme info
+    hugo = false
+    # whether to show copyright info
+    copyright = true
+    # whether to show the author
+    author = true
+    # site creation time
+    since = 2022
+    # ICP info only in China (HTML format is supported)
+    icp = ""
+    # license info (HTML format is supported)
+    license= ""
