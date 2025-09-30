@@ -1,6 +1,6 @@
 baseURL = 'https://wichaksono.github.io/'
 languageCode = 'en-us'
-title = 'Wichaksono | Web Developer'
+title = 'Wichaksono'
 theme = "keepit"
 
 # default amount of posts in each pages
@@ -15,7 +15,7 @@ copyright = ""
     # URL of the LOGO
     logo = ""
     # title name
-    name = "Wichaksono | Web Developer"
+    name = "Wichaksono"
     # you can add extra information before the name (HTML format is supported), such as icons
     pre = "<i class='fa-solid fa-terminal'></i>"
     # you can add extra information after the name (HTML format is supported), such as icons
@@ -28,15 +28,15 @@ copyright = ""
   [[menu.main]]
     weight = 1
     identifier = ""
-    pre = ""
+    pre = "<i class='fa-brands fa-github'></i>"
     post = ""
-    name = "My Portfolio"
+    name = "My Repository"
     url = "https://github.com/wichaksono"
-    title = "My Portfolio"
+    title = "My Repository"
   [[menu.main]]
     weight = 2
     identifier = "about"
-    pre = ""
+    pre = "<i class='fa-solid fa-address-card'></i>"
     post = ""
     name = "About"
     url = "/about"
@@ -44,9 +44,7 @@ copyright = ""
  [[menu.main]]
     weight = 3
     identifier = "posts"
-    # you can add extra information before the name (HTML format is supported), such as icons
-    pre = ""
-    # you can add extra information after the name (HTML format is supported), such as icons
+    pre = "<i class='fa-solid fa-book'></i>"
     post = ""
     name = "Blog"
     url = "/posts/"

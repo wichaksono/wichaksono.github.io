@@ -1,0 +1,190 @@
+{{- define "content" -}}
+    {{- $params := .Scratch.Get "params" -}}
+    {{- $profile := .Site.Params.home.profile -}}
+    {{- $posts := .Site.Params.home.posts -}}
+
+    {{- /* Basic styling for the new services section */ -}}
+    <style>
+        :root {
+            --theme-color: #2d96bd; /* biru elegan (Bootstrap style) */
+            --card-text-color-main: #222;
+            --card-text-color-secondary: #555;
+            --card-background: #fff;
+            --card-border-color: #eaeaea;
+            --body-background: #f9f9f9;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme-color: #4dabf7; /* biru lebih terang di dark mode */
+                --card-text-color-main: #a9a9b3;
+                --card-text-color-secondary: #aaa;
+                --card-background: #1f1f1f;
+                --card-border-color: #333;
+                --body-background: #121212;
+            }
+        }
+
+        .services-section {
+            padding: 5rem 1rem;
+            margin: 40px auto 0;
+            max-width: 1200px;
+        }
+        .services-section .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 320px;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--theme-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .service-card i {
+            font-size: 2rem;
+            color: #888;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+        .service-card:hover i {
+            color: var(--theme-color);
+        }
+        .service-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 0.75rem 0;
+            color: var(--card-text-color-main);
+        }
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--card-text-color-secondary);
+            margin: 0 0 1rem 0;
+            line-height: 1.6;
+        }
+        .service-card .price {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--theme-color);
+            margin-bottom: 1.25rem;
+        }
+        .service-link {
+            margin-top: auto; /* selalu di bawah */
+            display: inline-block;
+            padding: 0.65rem 1.25rem;
+            border: 1px solid var(--theme-color);
+            border-radius: 0.5rem;
+            color: #2d96bd !important;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .service-link:hover {
+            background: var(--theme-color);
+            color: #fff !important;
+        }
+        @media (prefers-color-scheme: dark) {
+            .service-card {
+                background: #1f1f1f;
+                border: 1px solid #333;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            }
+        }
+    </style>
+
+    <div class="page home"{{ if ne $posts.enable false }} data-home="posts"{{ end }}>
+        {{- if ne $profile.enable false -}}
+            {{- partial "home/profile.html" . -}}
+        {{- end -}}
+
+        <section class="services-section">
+            <h2 class="section-title">WordPress Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Tambah Fungsi Custom</h3>
+                    <p>Butuh fitur khusus untuk bisnis Anda? Kami tambahkan fungsi custom agar website lebih optimal.</p>
+                    <div class="price">Mulai dari Rp200.000</div>
+                    <a href="/services/custom-functions" class="service-link">Detail Layanan</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bug"></i>
+                    <h3>Perbaikan Tampilan Error</h3>
+                    <p>Tampilan website rusak atau tidak rapi? Kami kembalikan agar terlihat profesional dan nyaman digunakan.</p>
+                    <div class="price">Mulai dari Rp300.000</div>
+                    <a href="/services/fix-error" class="service-link">Detail Layanan</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Perbaikan Bug / Tema Konflik</h3>
+                    <p>Website bermasalah karena plugin atau tema bentrok? Kami perbaiki agar sistem kembali normal.</p>
+                    <div class="price">Mulai dari Rp400.000</div>
+                    <a href="/services/fix-bug" class="service-link">Detail Layanan</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Hapus Malware / Redirect Jahat</h3>
+                    <p>Website kena hack atau redirect ke situs asing? Kami bersihkan malware dan amankan website Anda.</p>
+                    <div class="price">Mulai dari Rp500.000</div>
+                    <a href="/services/remove-malware" class="service-link">Detail Layanan</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Plugin WordPress Custom</h3>
+                    <p>Kami buat plugin khusus sesuai kebutuhan bisnis, ringan dan aman digunakan.</p>
+                    <div class="price">Mulai dari Rp600.000</div>
+                    <a href="/services/custom-plugin" class="service-link">Detail Layanan</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>Maintenance Website Bulanan</h3>
+                    <p>Update, backup, keamanan hingga perawatan rutin. Website tetap stabil tanpa ribet.</p>
+                    <div class="price">Mulai dari Rp750.000</div>
+                    <a href="/services/maintenance" class="service-link">Detail Layanan</a>
+                </div>
+            </div>
+        </section>
+    </div>
+        {{- /* --- End of New Section --- */ -}}
+
+        {{- /* Posts */ -}}
+        {{- if ne $posts.enable false | and .Site.RegularPages -}}
+            {{- /* Paginate */ -}}
+            {{- $pages := where .Site.RegularPages "Type" "posts" -}}
+            {{- if .Site.Params.page.hiddenFromHomePage -}}
+                {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
+            {{- else -}}
+                {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
+            {{- end -}}
+            {{- with $posts.paginate | default .Site.Params.paginate -}}
+                {{- $pages = $.Paginate $pages . -}}
+            {{- else -}}
+                {{- $pages = .Paginate $pages -}}
+            {{- end -}}
+            {{- range $pages.Pages -}}
+                {{- .Render "summary" -}}
+            {{- end -}}
+            {{- partial "paginator.html" . -}}
+        {{- end -}}
+    </div>
+{{- end -}}
+
