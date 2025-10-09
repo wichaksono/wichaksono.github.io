@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+
+<body class="bg-gray-950 text-gray-300 antialiased flex items-start justify-center min-h-screen p-4">
+
+  <!-- Kontainer Utama -->
+  <main class="w-full max-w-lg mx-auto py-8 {{ if not .IsHome }}mb-20{{ end }}">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <!-- Footer hanya muncul jika bukan halaman utama -->
+  {{ if not .IsHome }}
+    {{ partial "footer.html" . }}
+  {{ end }}
+
+  <!-- Inisialisasi ikon Lucide -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

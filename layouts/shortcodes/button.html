@@ -1,16 +1,18 @@
-<div style="text-align:center; margin:2rem 0;">
-  <a href="{{ .Get "link" }}"
-     class="service-link"
-     style="
-       display:inline-block;
-       padding:0.8rem 1.5rem;
-       background:#2d96bd;
-       color:#fff;
-       border-radius:0.5rem;
-       text-decoration:none;
-       font-weight:600;
-       transition: all 0.3s ease;
-     ">
-    {{ .Get "text" }}
-  </a>
-</div>
+{{/* 
+  Shortcode: button
+  Contoh penggunaan:
+  {{< button href="/contact/" color="blue" text="Hubungi Saya" >}}
+*/}}
+
+{{ $href := .Get "href" | default "#" }}
+{{ $text := .Get "text" | default "Klik di sini" }}
+{{ $color := .Get "color" | default "blue" }}
+{{ $target := .Get "target" | default "_self" }}
+{{ $icon := .Get "icon" }}
+
+<a href="{{ $href }}" target="{{ $target }}"
+   class="inline-flex items-center px-4 py-2.5 text-sm font-semibold rounded-lg transition 
+          bg-{{ $color }}-600 hover:bg-{{ $color }}-700 text-white shadow-md">
+  {{ if $icon }}<i data-lucide="{{ $icon }}" class="w-4 h-4 mr-2"></i>{{ end }}
+  {{ $text }}
+</a>

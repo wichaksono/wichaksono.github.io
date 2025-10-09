@@ -1,0 +1,47 @@
+{{ define "main" }}
+
+<header class="mb-12 border-b border-gray-700 pb-6">
+  <a href="/" class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200">
+    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Kembali ke Halaman Utama
+  </a>
+
+  <h1 class="text-4xl font-extrabold text-white mb-2">Layanan Website</h1>
+  {{ with .Params.description }}
+    <p class="text-lg text-gray-400">{{ . }}</p>
+  {{ else }}
+    <p class="text-lg text-gray-400">Layanan profesional untuk perbaikan, pengembangan, dan optimasi website Anda.</p>
+  {{ end }}
+</header>
+
+<!-- Daftar layanan -->
+<section class="mt-12 space-y-4 max-w-3xl mx-auto">
+  {{ range sort .Pages ".Params.order" "asc" }}
+  <a href="{{ .RelPermalink }}" 
+     class="group flex items-start bg-gray-900 border border-gray-800 hover:border-blue-500 rounded-xl p-5 sm:p-6 shadow-md hover:shadow-blue-900/20 transition duration-300">
+    
+    <!-- Ikon Layanan -->
+    {{ with .Params.icon }}
+      <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-900/40 border border-blue-700 text-blue-400 mr-4 group-hover:bg-blue-800/50 group-hover:text-blue-300 transition duration-300">
+        <i data-lucide="{{ . }}" class="w-5 h-5"></i>
+      </div>
+    {{ end }}
+
+    <!-- Konten -->
+    <div class="flex-1">
+      <h3 class="text-lg font-bold text-blue-400 mb-1 group-hover:text-blue-300 transition">
+        {{ .Title }}
+      </h3>
+      {{ with .Params.summary }}
+        <p class="text-sm text-gray-400 leading-relaxed mb-2">{{ . }}</p>
+      {{ end }}
+      <span class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium text-sm transition">
+        Lihat Detail
+        <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+      </span>
+    </div>
+  </a>
+  {{ end }}
+</section>
+
+
+{{ end }}

@@ -1,0 +1,90 @@
+{{ define "main" }}
+  {{ if not .IsHome }}
+  <!-- Header Blog -->
+  <header class="mb-12 border-b border-gray-700 pb-6">
+      <a 
+          href="/" 
+          class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200"
+      >
+          <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i>
+          Kembali ke Halaman Utama
+      </a>
+      <h1 class="text-4xl font-extrabold text-white mb-2">{{ .Title }}</h1>
+      {{ with .Params.summary }}
+        <p class="text-lg text-gray-400">{{ . }}</p>
+      {{ end }}
+  </header>
+  {{ end }}
+
+  {{ $paginator := .Paginate .Pages }}
+
+  <!-- Daftar Artikel -->
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {{ range $paginator.Pages }}
+      {{ $p := . }}
+      <div class="article-card bg-gray-900 border border-gray-700 hover:border-blue-500 rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            {{ with $p.Params.tags }}
+              {{ range first 1 . }}
+                <a href="{{ "/tags/" | relURL }}{{ lower (urlize .) }}/"
+                  class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-900/50 text-blue-300 mb-2 inline-block">
+                  {{ . }}
+                </a>
+              {{ end }}
+            {{ end }}
+
+            <h2 class="text-xl font-bold text-white mb-2 title">
+              <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+            </h2>
+
+            <p class="text-sm text-gray-400 mb-4">{{ $p.Summary }}</p>
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-gray-500">
+              <div class="flex items-center">
+                  <i data-lucide="calendar" class="w-3 h-3 mr-1.5"></i> {{ $p.Date.Format "2 Jan 2006" }}
+              </div>
+              <div class="flex items-center">
+                  <i data-lucide="clock" class="w-3 h-3 mr-1.5"></i> {{ $p.ReadingTime }} Menit Baca
+              </div>
+          </div>
+      </div>
+    {{ end }}
+  </section>
+
+  <!-- Pagination -->
+  {{ if gt $paginator.TotalPages 1 }}
+  <nav aria-label="Pagination" class="mt-10 flex justify-center">
+    <ul class="flex items-center space-x-2">
+      {{ if $paginator.HasPrev }}
+        <li>
+          <a href="{{ $paginator.Prev.URL }}" 
+             class="px-3 py-1.5 bg-gray-800 text-gray-300 rounded-md hover:bg-gray-700 transition">
+            « Prev
+          </a>
+        </li>
+      {{ end }}
+
+      {{ range $paginator.Pagers }}
+        <li>
+          <a href="{{ .URL }}" 
+             class="px-3 py-1.5 rounded-md transition 
+             {{ if eq . $paginator }}bg-blue-600 text-white{{ else }}bg-gray-800 text-gray-300 hover:bg-gray-700{{ end }}">
+            {{ .PageNumber }}
+          </a>
+        </li>
+      {{ end }}
+
+      {{ if $paginator.HasNext }}
+        <li>
+          <a href="{{ $paginator.Next.URL }}" 
+             class="px-3 py-1.5 bg-gray-800 text-gray-300 rounded-md hover:bg-gray-700 transition">
+            Next »
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </nav>
+  {{ end }}
+
+{{ end }}

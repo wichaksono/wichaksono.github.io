@@ -1,0 +1,17 @@
+{{ define "main" }}
+<header class="mb-12 border-b border-gray-700 pb-6">
+  <a href="/" class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200">
+    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Kembali ke Halaman Utama
+  </a>
+  <h1 class="text-4xl font-extrabold text-white mb-3">{{ .Title }}</h1>
+
+  {{ with .Params.summary }}
+    <p class="text-lg text-gray-400">{{ . }}</p>
+  {{ end }}
+</header>
+
+<!-- Konten Artikel -->
+<article class="text-lg space-y-8 text-gray-300">
+  {{ .Content }}
+</article>
+{{ end }}

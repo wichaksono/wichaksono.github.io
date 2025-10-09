@@ -1,0 +1,101 @@
+{{ define "main" }}
+<header class="mb-12 border-b border-gray-700 pb-6">
+  <a href="/services/" class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200">
+    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Kembali ke Layanan
+  </a>
+
+  <h1 class="text-4xl font-extrabold text-white mb-3">{{ .Title }}</h1>
+
+  {{ with .Params.summary }}
+    <p class="text-lg text-gray-400 max-w-2xl mx-auto">{{ . }}</p>
+  {{ end }}
+</header>
+
+<!-- Deskripsi utama -->
+<section class="mb-12 text-gray-300">
+
+  <article class="prose prose-invert max-w-none text-gray-300">
+    {{ .Content }}
+  </article>
+
+  {{ with .Params.cta }}
+    <a href="{{ .url }}" 
+        class="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg mt-4 transition duration-200">
+        <i data-lucide="phone-outgoing" class="w-5 h-5 mr-2 text-white"></i>
+        <span>{{ .text }}</span>
+    </a>
+  {{ end }}
+
+</section>
+
+<!-- Bagian: Fitur -->
+{{ with .Params.features }}
+<section class="mb-12">
+  <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-3">
+    {{ $.Params.features_title }}
+  </h2>
+  <ul class="space-y-3 text-gray-300 bg-gray-900 p-6 rounded-xl border border-gray-800">
+    {{ range . }}
+        <li class="flex items-center">
+        <i data-lucide="circle-check" class="w-5 h-5 mr-3 text-blue-400 flex-shrink-0"></i>
+        <span>{{ .text }}</span>
+        </li>
+    {{ end }}
+    </ul>
+
+</section>
+{{ end }}
+
+<!-- Bagian: Proses & Harga -->
+<section class="mb-12 grid grid-cols-1 gap-6">
+ <div class="p-6 bg-gray-900 rounded-xl border border-gray-800 flex flex-col items-center justify-center text-center">
+  <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+    <i data-lucide="workflow" class="w-6 h-6 mr-3 text-blue-400"></i>
+    Lihat Proses Pengerjaan
+  </h3>
+  <p class="text-gray-400 mb-4 text-sm max-w-md">
+    Pelajari tahapan dan cara kerja saya dalam menangani proyek dan permintaan fitur custom.
+  </p>
+  <a href="/how-it-works"
+     class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+    Baca Selengkapnya
+    <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+  </a>
+</div>
+
+  <!-- Harga -->
+  {{ with .Params.price }}
+  <div class="p-6 bg-blue-900/50 rounded-xl border border-blue-800">
+    <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+      <i data-lucide="dollar-sign" class="w-6 h-6 mr-3 text-blue-300"></i>
+      Harga & Garansi
+    </h3>
+    <p class="text-3xl font-extrabold text-white mb-4">
+      Mulai dari <span class="text-blue-300">{{ .start }}</span>
+    </p>
+    <p class="text-sm text-gray-200 italic mb-6">{{ .note }}</p>
+
+    {{ with .warranty }}
+      <h4 class="font-semibold text-white mb-2">Garansi & Support:</h4>
+      <ul class="text-sm text-gray-200 space-y-1">
+        {{ range . }}
+          <li class="flex items-center">
+            <i data-lucide="check-circle" class="w-4 h-4 mr-2 text-green-400"></i>
+            {{ . }}
+          </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </div>
+  {{ end }}
+</section>
+
+<!-- Footer -->
+<footer class="mt-12 text-center text-gray-500 text-sm">
+  <p>
+    Siap meningkatkan website Anda?
+    <a href="/#contact" class="text-blue-400 hover:underline">Hubungi saya sekarang.</a>
+  </p>
+</footer>
+
+{{ end }}

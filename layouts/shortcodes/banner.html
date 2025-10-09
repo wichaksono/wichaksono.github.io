@@ -1,0 +1,15 @@
+<div class="my-8 p-6 sm:p-8 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 rounded-2xl shadow-xl border border-blue-600/30 text-center">
+  <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+    {{ .Get "title" | default "Butuh Bantuan Perbaikan Website?" }}
+  </h2>
+
+  <p class="text-gray-200 mb-6 text-base sm:text-lg">
+    {{ .Get "text" | default "Saya siap membantu memperbaiki error, malware, tampilan rusak, atau membuat plugin custom untuk website WordPress Anda." }}
+  </p>
+
+  <a href='{{ .Get "url" | default "/#contact" }}' 
+     class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
+     <i data-lucide="{{ .Get "icon" | default "wrench" }}" class="w-5 h-5 mr-2"></i>
+     {{ .Get "button" | default "Hubungi Sekarang" }}
+  </a>
+</div>

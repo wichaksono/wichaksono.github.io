@@ -1,190 +1,150 @@
-{{- define "content" -}}
-    {{- $params := .Scratch.Get "params" -}}
-    {{- $profile := .Site.Params.home.profile -}}
-    {{- $posts := .Site.Params.home.posts -}}
+{{ define "main" }}
+  <!-- Header Profil -->
+  <header class="text-center mb-8">
+      <img 
+          src="{{ .Site.Params.profile.photo }}" 
+          alt="{{ .Site.Params.profile.name }}" 
+          class="w-32 h-32 rounded-full mx-auto border-4 border-blue-500 shadow-xl mb-4 object-cover"
+      >
 
-    {{- /* Basic styling for the new services section */ -}}
-    <style>
-        :root {
-            --theme-color: #2d96bd; /* biru elegan (Bootstrap style) */
-            --card-text-color-main: #222;
-            --card-text-color-secondary: #555;
-            --card-background: #fff;
-            --card-border-color: #eaeaea;
-            --body-background: #f9f9f9;
-        }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme-color: #4dabf7; /* biru lebih terang di dark mode */
-                --card-text-color-main: #a9a9b3;
-                --card-text-color-secondary: #aaa;
-                --card-background: #1f1f1f;
-                --card-border-color: #333;
-                --body-background: #121212;
-            }
-        }
+      <h1 class="text-3xl font-extrabold text-white">
+          {{ .Site.Params.profile.name }}
+      </h1>
 
-        .services-section {
-            padding: 5rem 1rem;
-            margin: 40px auto 0;
-            max-width: 1200px;
-        }
-        .services-section .section-title {
-            font-size: 2.25rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .service-card {
-            background: #fff;
-            border: 1px solid #eaeaea;
-            border-radius: 0.75rem;
-            padding: 2rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            min-height: 320px;
-        }
-        .service-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--theme-color);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        .service-card i {
-            font-size: 2rem;
-            color: #888;
-            margin-bottom: 1rem;
-            transition: color 0.3s ease;
-        }
-        .service-card:hover i {
-            color: var(--theme-color);
-        }
-        .service-card h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin: 0 0 0.75rem 0;
-            color: var(--card-text-color-main);
-        }
-        .service-card p {
-            font-size: 0.95rem;
-            color: var(--card-text-color-secondary);
-            margin: 0 0 1rem 0;
-            line-height: 1.6;
-        }
-        .service-card .price {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--theme-color);
-            margin-bottom: 1.25rem;
-        }
-        .service-link {
-            margin-top: auto; /* selalu di bawah */
-            display: inline-block;
-            padding: 0.65rem 1.25rem;
-            border: 1px solid var(--theme-color);
-            border-radius: 0.5rem;
-            color: #2d96bd !important;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .service-link:hover {
-            background: var(--theme-color);
-            color: #fff !important;
-        }
-        @media (prefers-color-scheme: dark) {
-            .service-card {
-                background: #1f1f1f;
-                border: 1px solid #333;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-            }
-        }
-    </style>
+     {{ with .Site.Params.profile.title }}
+      <p class="text-lg font-medium text-blue-400 mt-1 mb-3">
+        {{ . }}
+      </p>
+    {{ end }}
 
-    <div class="page home"{{ if ne $posts.enable false }} data-home="posts"{{ end }}>
-        {{- if ne $profile.enable false -}}
-            {{- partial "home/profile.html" . -}}
-        {{- end -}}
+    {{ with .Site.Params.profile.quote }}
+      <p class="text-sm italic text-gray-400 max-w-sm mx-auto">
+        "{{ . }}"
+      </p>
+    {{ end }}
 
-        <section class="services-section">
-            <h2 class="section-title">WordPress Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-cogs"></i>
-                    <h3>Tambah Fungsi Custom</h3>
-                    <p>Butuh fitur khusus untuk bisnis Anda? Kami tambahkan fungsi custom agar website lebih optimal.</p>
-                    <div class="price">Mulai dari Rp200.000</div>
-                    <a href="/services/custom-functions" class="service-link">Detail Layanan</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-bug"></i>
-                    <h3>Perbaikan Tampilan Error</h3>
-                    <p>Tampilan website rusak atau tidak rapi? Kami kembalikan agar terlihat profesional dan nyaman digunakan.</p>
-                    <div class="price">Mulai dari Rp300.000</div>
-                    <a href="/services/fix-error" class="service-link">Detail Layanan</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-tools"></i>
-                    <h3>Perbaikan Bug / Tema Konflik</h3>
-                    <p>Website bermasalah karena plugin atau tema bentrok? Kami perbaiki agar sistem kembali normal.</p>
-                    <div class="price">Mulai dari Rp400.000</div>
-                    <a href="/services/fix-bug" class="service-link">Detail Layanan</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Hapus Malware / Redirect Jahat</h3>
-                    <p>Website kena hack atau redirect ke situs asing? Kami bersihkan malware dan amankan website Anda.</p>
-                    <div class="price">Mulai dari Rp500.000</div>
-                    <a href="/services/remove-malware" class="service-link">Detail Layanan</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Plugin WordPress Custom</h3>
-                    <p>Kami buat plugin khusus sesuai kebutuhan bisnis, ringan dan aman digunakan.</p>
-                    <div class="price">Mulai dari Rp600.000</div>
-                    <a href="/services/custom-plugin" class="service-link">Detail Layanan</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-sync-alt"></i>
-                    <h3>Maintenance Website Bulanan</h3>
-                    <p>Update, backup, keamanan hingga perawatan rutin. Website tetap stabil tanpa ribet.</p>
-                    <div class="price">Mulai dari Rp750.000</div>
-                    <a href="/services/maintenance" class="service-link">Detail Layanan</a>
-                </div>
+  </header>
+
+  <!-- Daftar Tautan Utama -->
+  <section class="space-y-4" id="contact">
+    {{ range .Site.Params.links }}
+      <a 
+        href="{{ .url }}" 
+        {{ if .newtab }}target="_blank" rel="noopener noreferrer"{{ end }}
+        class="flex items-center justify-center p-4 bg-gray-800 rounded-xl text-white font-semibold shadow-md border-2 border-transparent hover:border-blue-500 transition"
+      >
+        <i data-lucide="{{ .icon }}" class="w-5 h-5 mr-3 text-blue-400"></i>
+        {{ .text }}
+      </a>
+    {{ end }}
+  </section>
+
+
+  <!-- Section: Services -->
+  <section class="mt-16">
+    <div class="mb-8">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+          Layanan Saya
+        </h2>
+        <a href="/services/" 
+          class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition duration-200 whitespace-nowrap">
+          Lihat Semua
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+        </a>
+      </div>
+
+      <p class="text-gray-400 max-w-xl text-sm sm:text-base leading-relaxed">
+        Pilih layanan WordPress sesuai kebutuhan Anda — mulai dari perbaikan, pembersihan, hingga pengembangan plugin custom.
+      </p>
+    </div>
+    <div class="space-y-4 max-w-3xl mx-auto">
+      {{ range first 3 (sort (where .Site.RegularPages "Section" "services") ".Params.order" "asc") }}
+        <a href="{{ .RelPermalink }}" 
+          class="flex items-start bg-gray-900 border border-gray-700 hover:border-blue-500 rounded-xl p-5 sm:p-6 shadow-lg hover:shadow-blue-900/20 transition duration-300">
+          
+          {{ with .Params.icon }}
+            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-900/50 border border-blue-700 text-blue-400 mr-4">
+              <i data-lucide="{{ . }}" class="w-5 h-5"></i>
             </div>
-        </section>
-    </div>
-        {{- /* --- End of New Section --- */ -}}
+          {{ end }}
 
-        {{- /* Posts */ -}}
-        {{- if ne $posts.enable false | and .Site.RegularPages -}}
-            {{- /* Paginate */ -}}
-            {{- $pages := where .Site.RegularPages "Type" "posts" -}}
-            {{- if .Site.Params.page.hiddenFromHomePage -}}
-                {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
-            {{- else -}}
-                {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
-            {{- end -}}
-            {{- with $posts.paginate | default .Site.Params.paginate -}}
-                {{- $pages = $.Paginate $pages . -}}
-            {{- else -}}
-                {{- $pages = .Paginate $pages -}}
-            {{- end -}}
-            {{- range $pages.Pages -}}
-                {{- .Render "summary" -}}
-            {{- end -}}
-            {{- partial "paginator.html" . -}}
-        {{- end -}}
+          <div>
+            <h3 class="text-lg font-bold text-blue-400 mb-1">{{ .Title }}</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-2">{{ .Params.summary }}</p>
+            <span class="inline-flex items-center text-blue-400 hover:text-blue-300 text-sm font-medium transition">
+              Selengkapnya
+              <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+            </span>
+          </div>
+        </a>
+      {{ end }}
     </div>
-{{- end -}}
+  </section>
 
+
+  <!-- Section: Projects -->
+  <section class="mt-16">
+    <div class="mb-8">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+          Proyek Terbaru
+        </h2>
+        <a href="/projects/" 
+           class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition duration-200">
+          Lihat Semua
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+        </a>
+      </div>
+
+      <p class="text-gray-400 max-w-xl text-center sm:text-left mx-auto sm:mx-0">
+        Beberapa proyek terbaru yang telah saya kerjakan — mulai dari website bisnis, landing page, hingga sistem custom menggunakan Hugo dan Laravel.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {{ range first 2 (where .Site.RegularPages "Section" "projects") }}
+        <a href="{{ .RelPermalink }}" class="block bg-gray-900 border border-gray-700 rounded-xl p-6 hover:border-blue-500 transition">
+          {{ with .Params.thumbnail }}
+            <img src="{{ . }}" alt="{{ $.Title }}" class="rounded-lg mb-4">
+          {{ end }}
+          <h3 class="text-xl font-bold text-blue-400 mb-2 title">{{ .Title }}</h3>
+          <p class="text-sm text-gray-400">{{ .Params.summary }}</p>
+        </a>
+      {{ end }}
+    </div>
+  </section>
+
+
+  <!-- Section: Blog -->
+  <section class="mt-16">
+    <div class="mb-8">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+          Tulisan Terbaru
+        </h2>
+        <a href="/blog/" 
+           class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition duration-200">
+          Lihat Semua
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+        </a>
+      </div>
+
+      <p class="text-gray-400 max-w-xl text-center sm:text-left mx-auto sm:mx-0">
+        Baca tulisan seputar pengembangan website, optimasi performa, hingga tips teknis seputar WordPress dan pemrograman web modern.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {{ range first 2 (where .Site.RegularPages "Section" "blog") }}
+        <a href="{{ .RelPermalink }}" class="block bg-gray-900 border border-gray-700 rounded-xl p-6 hover:border-blue-500 transition">
+          <h3 class="text-xl font-bold text-blue-400 mb-2 title">{{ .Title }}</h3>
+          <p class="text-sm text-gray-400 mb-4">{{ .Params.summary }}</p>
+          <div class="flex items-center text-xs text-gray-500">
+            <i data-lucide="calendar" class="w-3 h-3 mr-1.5"></i> {{ .Date.Format "2 Jan 2006" }}
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

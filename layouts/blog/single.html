@@ -1,0 +1,47 @@
+{{ define "main" }}
+<header class="mb-12 border-b border-gray-700 pb-6">
+    <a href="/blog/" class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200">
+      <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Kembali ke Blog
+    </a>
+
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight">
+      {{ .Title }}
+    </h1>
+
+    {{ with .Params.summary }}
+      <p class="text-lg text-gray-400">{{ . }}</p>
+    {{ end }}
+
+    <!-- Meta Info -->
+    <div class="flex items-center space-x-4 text-sm text-gray-500 mt-4">
+        <div class="flex items-center">
+            <i data-lucide="calendar" class="w-4 h-4 mr-1.5"></i> {{ .Date.Format "2 Jan 2006" }}
+        </div>
+        <div class="flex items-center">
+            <i data-lucide="clock" class="w-4 h-4 mr-1.5"></i> {{ .ReadingTime }} Menit Baca
+        </div>
+        <div class="flex items-center">
+            <i data-lucide="user" class="w-4 h-4 mr-1.5"></i> Oleh {{ .Site.Params.profile.name }}
+        </div>
+    </div>
+</header>
+
+<!-- Konten Artikel -->
+<article class="text-lg space-y-8 text-gray-300">
+  {{ .Content }}
+</article>
+
+{{ with .Params.tags }}
+<div class="flex flex-wrap items-center gap-2 mt-12">
+    <span class="text-sm font-semibold text-gray-300 inline-block">
+        Tags:
+    </span>
+    {{ range . }}
+    <span class="text-sm font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 inline-block">
+        {{ . }}
+    </span>
+    {{ end }}
+</div>
+{{ end }}
+
+{{ end }}

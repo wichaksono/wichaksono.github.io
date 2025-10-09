@@ -1,0 +1,70 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+
+{{/* Description fallback: page -> site.params -> site.title */}}
+{{ if .Params.description }}
+  <meta name="description" content="{{ .Params.description }}">
+{{ else if .Site.Params.description }}
+  <meta name="description" content="{{ .Site.Params.description }}">
+{{ else }}
+  <meta name="description" content="{{ .Site.Title }}">
+{{ end }}
+
+{{/* Canonical */}}
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* Favicon */}}
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" type="image/x-icon">
+
+{{/* Tailwind CSS */}}
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<link rel="stylesheet" href="{{ "css/styles.css" | relURL }}">
+
+{{ if .Params.noindex }}
+  <meta name="robots" content="noindex, nofollow">
+{{ end }}
+
+{{/* Open Graph */}}
+<meta property="og:title" content="{{ .Title | default .Site.Title }}">
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ if .Params.description }}
+  <meta property="og:description" content="{{ .Params.description }}">
+{{ else if .Site.Params.description }}
+  <meta property="og:description" content="{{ .Site.Params.description }}">
+{{ end }}
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="{{ .Site.LanguageCode | default "en_US" }}">
+
+{{ if .Params.og_image }}
+  <meta property="og:image" content="{{ .Params.og_image | absURL }}">
+{{ else if .Params.header }}
+  <meta property="og:image" content="{{ .Params.header | absURL }}">
+{{ else if .Site.Params.og_image }}
+  <meta property="og:image" content="{{ .Site.Params.og_image | absURL }}">
+{{ end }}
+
+{{/* Twitter */}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ .Title | default .Site.Title }}">
+{{ if .Params.description }}
+  <meta name="twitter:description" content="{{ .Params.description }}">
+{{ else if .Site.Params.description }}
+  <meta name="twitter:description" content="{{ .Site.Params.description }}">
+{{ end }}
+
+{{ if .Params.og_image }}
+  <meta name="twitter:image" content="{{ .Params.og_image | absURL }}">
+{{ else if .Params.header }}
+  <meta name="twitter:image" content="{{ .Params.header | absURL }}">
+{{ else if .Site.Params.og_image }}
+  <meta name="twitter:image" content="{{ .Site.Params.og_image | absURL }}">
+{{ end }}
+
+<meta name="theme-color" content="#ffffff">
+
+{{ block "head_extra" . }}{{ end }}

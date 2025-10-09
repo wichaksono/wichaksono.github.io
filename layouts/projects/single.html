@@ -1,0 +1,82 @@
+{{ define "main" }}
+
+<!-- Header Proyek -->
+<header class="mb-12 border-b border-gray-700 pb-6">
+  <a href="/projects/" class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200">
+    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Kembali ke Projects
+  </a>
+
+  <h1 class="text-4xl font-extrabold text-white mb-3">{{ .Title }}</h1>
+
+  {{ with .Params.summary }}
+    <p class="text-lg text-gray-400 max-w-2xl mx-auto">{{ . }}</p>
+  {{ end }}
+</header>
+
+<!-- Info Detail -->
+<section class="bg-gray-900 border border-gray-700 rounded-xl p-6 sm:p-8 mb-12 max-w-5xl mx-auto">
+  <div class="grid sm:grid-cols-2 gap-6 text-gray-300">
+    {{ with .Params.client }}
+      <p><span class="font-semibold text-white">Klien:</span> {{ . }}</p>
+    {{ end }}
+
+    {{ with .Params.year }}
+      <p><span class="font-semibold text-white">Tahun:</span> {{ . }}</p>
+    {{ end }}
+
+    {{ with .Params.role }}
+      <p><span class="font-semibold text-white">Peran:</span> {{ . }}</p>
+    {{ end }}
+
+    {{ with .Params.technologies }}
+      <p>
+        <span class="font-semibold text-white">Teknologi:</span><br>
+        {{ range . }}
+          <span class="inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-900/50 text-blue-300 mr-1 mt-1">
+            {{ . }}
+          </span>
+        {{ end }}
+      </p>
+    {{ end }}
+
+    {{ with .Params.link }}
+      <p>
+        <span class="font-semibold text-white">Tautan:</span><br>
+        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 break-all">
+          {{ . }}
+        </a>
+      </p>
+    {{ end }}
+  </div>
+</section>
+
+<!-- Konten Utama -->
+<article class="text-gray-300 leading-relaxed max-w-5xl mx-auto mb-12 space-y-6">
+  {{ .Content }}
+</article>
+
+<!-- Tag Proyek -->
+{{ with index .Params "projects/tags" }}
+<section class="max-w-5xl mx-auto mt-12">
+  <h2 class="text-lg font-semibold text-white mb-3">Tag Proyek:</h2>
+  <div class="flex flex-wrap">
+    {{ range . }}
+      <a href="{{ "/projects/tags/" | relURL }}{{ lower (urlize .) }}/"
+         class="inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-900/50 text-blue-300 mr-2 mb-2 hover:bg-blue-800/70 transition">
+         {{ . }}
+      </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+<!-- Tombol CTA -->
+<div class="text-center mt-12">
+  <a href="/contact" 
+     class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
+    <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+    Diskusikan Proyek Anda
+  </a>
+</div>
+
+{{ end }}

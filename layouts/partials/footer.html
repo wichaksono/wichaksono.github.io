@@ -1,0 +1,22 @@
+{{ if .Site.Params.floatingnav.enabled }}
+  <!-- Spacer untuk Mobile Nav -->
+  <div class="mobile-nav-spacer sm:hidden"></div>
+
+  <!-- Floating Navigation -->
+  <nav class="fixed bottom-0 left-0 right-0 sm:left-auto sm:bottom-8 sm:right-8 w-full sm:max-w-xs md:max-w-md bg-gray-900 border-t sm:border border-blue-500/50 sm:rounded-xl shadow-2xl z-50">
+    <div class="flex justify-around sm:justify-between p-3">
+      {{ range .Site.Params.floatingnav.items }}
+        <a href="{{ .url }}"
+           class="flex flex-col sm:flex-row items-center px-2 font-semibold transition duration-200
+                  {{ if eq .id $.Site.Params.floatingnav.active }}
+                    text-blue-400
+                  {{ else }}
+                    text-gray-300 hover:text-blue-400
+                  {{ end }}">
+          <i data-lucide="{{ .icon }}" class="w-5 h-5 sm:mr-2"></i>
+          <span class="text-xs sm:text-sm font-medium mt-1 sm:mt-0">{{ .label }}</span>
+        </a>
+      {{ end }}
+    </div>
+  </nav>
+{{ end }}

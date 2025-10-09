@@ -1,105 +1,108 @@
-baseURL = 'https://wichaksono.github.io/'
-languageCode = 'en-us'
-title = 'Wichaksono'
-theme = "keepit"
+baseURL = "https://example.github.io/"
+languageCode = "en-us"
+title = "My Hugo Site"
+ignoreLogs = ["warning-goldmark-raw-html"]
 
-# default amount of posts in each pages
-paginate = 12
-# google analytics code [UA-XXXXXXXX-X]
-googleAnalytics = ""
-# copyright description used only for seo schema
-copyright = ""
+[pagination]
+  pagerSize = 6
 
-# Header title config
-[params.header.title]
-    # URL of the LOGO
-    logo = ""
-    # title name
-    name = "Wichaksono"
-    # you can add extra information before the name (HTML format is supported), such as icons
-    pre = "<i class='fa-solid fa-terminal'></i>"
-    # you can add extra information after the name (HTML format is supported), such as icons
-    post = ""
-    # whether to use typeit animation for title name
-    typeit = true
+[taxonomies]
+  tag = "tags"
+  project_tag = "projects/tags"
 
-# Menu config
-[menu]
-  [[menu.main]]
-    weight = 1
-    identifier = ""
-    pre = "<i class='fa-brands fa-github'></i>"
-    post = ""
-    name = "My Repository"
-    url = "https://github.com/wichaksono"
-    title = "My Repository"
-  [[menu.main]]
-    weight = 2
-    identifier = "about"
-    pre = "<i class='fa-solid fa-address-card'></i>"
-    post = ""
-    name = "About"
-    url = "/about"
-    title = "About"
- [[menu.main]]
-    weight = 3
-    identifier = "posts"
-    pre = "<i class='fa-solid fa-book'></i>"
-    post = ""
-    name = "Blog"
-    url = "/posts/"
-    # title will be shown when you hover on this menu link
-    title = ""
-  
+[params]
+  description = "Fast, secure websites built with Hugo + Bootstrap"
+  og_image = "/images/og-default.jpg"
+  home_url = "#"
+  project_url = "#"
+  blog_url = "#"
+  contact_url = "#"
 
-# Home page config
-  [params.home]
-    # amount of RSS pages
-    rss = 10
-    # Home page profile
-    [params.home.profile]
-      enable = true
-      # Gravatar Email for preferred avatar in home page
-      gravatarEmail = ""
-      # URL of avatar shown in home page
-      avatarURL = "/neon-icon-color.png"
-      # title shown in home page (HTML format is supported)
-      title = ""
-      # subtitle shown in home page
-      subtitle = "A Clean, Elegant but Advanced Hugo Theme"
-      # whether to use typeit animation for subtitle
-      typeit = true
-      # whether to show social links
-      social = true
-      # disclaimer (HTML format is supported)
-      disclaimer = ""
-    # Home page posts
-    [params.home.posts]
-      enable = false
-      # special amount of posts in each home posts page
-      paginate = 6
-    
-    # Social config in home page
-  [params.social]
-    GitHub = "#"
-    Facebook = "#"
-    Telegram = "#"
-    Whatsapp = "#"
+[params.profile]
+  name = "Raden"
+  title = "Pengembang Web | Insinyur Perangkat Lunak"
+  quote = "Membangun solusi digital yang efisien, terukur, dan berfokus pada pengalaman pengguna."
+  photo = "https://placehold.co/120x120/1f2937/ffffff?text=DEV"
 
-# Footer config
-  [params.footer]
-    enable = true
-    # Custom content (HTML format is supported)
-    custom = ""
-    # whether to show Hugo and theme info
-    hugo = false
-    # whether to show copyright info
-    copyright = true
-    # whether to show the author
-    author = true
-    # site creation time
-    since = 2022
-    # ICP info only in China (HTML format is supported)
-    icp = ""
-    # license info (HTML format is supported)
-    license= ""
+# ======================
+#  Link Utama (Tombol)
+# ======================
+
+[[params.links]]
+  icon = "facebook"
+  text = "Facebook"
+  url = "https://facebook.com/username"
+  newtab = true
+
+[[params.links]]
+  icon = "youtube"
+  text = "YouTube"
+  url = "https://youtube.com/@username"
+  newtab = true
+
+[[params.links]]
+  icon = "message-circle-code"
+  text = "WhatsApp"
+  url = "https://wa.me/6281234567890"
+  newtab = true
+
+[[params.links]]
+  icon = "badge-info"
+  text = "About me"
+  url = "/about"
+  newtab = false
+
+
+# ======================
+#  Sosial Media / Kontak
+# ======================
+[[params.socials]]
+  icon = "github"
+  url  = "https://github.com/username"
+  label = "GitHub"
+
+[[params.socials]]
+  icon = "linkedin"
+  url  = "https://linkedin.com/in/username"
+  label = "LinkedIn"
+
+[[params.socials]]
+  icon = "facebook"
+  url  = "https://facebook.com/username"
+  label = "Facebook"
+
+[[params.socials]]
+  icon = "mail"
+  url  = "mailto:emailanda@example.com"
+  label = "Email"
+
+# ======================
+#  FLOATING NAVIGATION
+# ======================
+[params.floatingnav]
+  enabled = true
+  active = "contact" # bisa: home, portfolio, blog, contact
+
+[[params.floatingnav.items]]
+  icon = "hammer"
+  label = "Services"
+  url = "/services"
+  id = "services"
+
+[[params.floatingnav.items]]
+  icon = "monitor"
+  label = "Portfolio"
+  url = "/projects"
+  id = "portfolio"
+
+[[params.floatingnav.items]]
+  icon = "pencil"
+  label = "Blog"
+  url = "/blog"
+  id = "blog"
+
+[[params.floatingnav.items]]
+  icon = "message-square-code"
+  label = "Contact"
+  url = "/"
+  id = "contact"

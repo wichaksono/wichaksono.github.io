@@ -1,0 +1,30 @@
+{{ define "main" }}
+  <!-- Header -->
+  <header class="mb-12 border-b border-gray-700 pb-6">
+    <a href="/blog/" 
+       class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200">
+      <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i>
+      Kembali ke Blog
+    </a>
+    <h1 class="text-4xl font-extrabold text-white mb-2">Tag: {{ .Title }}</h1>
+  </header>
+
+  <!-- Daftar Artikel -->
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {{ range .Pages }}
+      <a href="{{ .RelPermalink }}" 
+         class="block bg-gray-900 border border-gray-700 rounded-xl p-6 hover:border-blue-500 transition shadow-md hover:shadow-blue-900/20">
+        
+        <h2 class="text-xl font-bold text-blue-400 mb-2 hover:text-blue-300 transition title">
+          {{ .Title }}
+        </h2>
+        <p class="text-sm text-gray-400 mb-4 line-clamp-3">{{ .Summary }}</p>
+
+        <div class="flex items-center text-xs text-gray-500">
+          <i data-lucide="calendar" class="w-3 h-3 mr-1.5"></i>
+          {{ .Date.Format "2 Jan 2006" }}
+        </div>
+      </a>
+    {{ end }}
+  </section>
+{{ end }}
