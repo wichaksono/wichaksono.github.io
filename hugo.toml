@@ -1,6 +1,6 @@
-baseURL = "https://example.github.io/"
+baseURL = "https://wichaksono.github.io/"
 languageCode = "en-us"
-title = "My Hugo Site"
+title = "Wichaksono W"
 ignoreLogs = ["warning-goldmark-raw-html"]
 
 [pagination]
@@ -19,9 +19,9 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   contact_url = "#"
 
 [params.profile]
-  name = "Raden"
-  title = "Pengembang Web | Insinyur Perangkat Lunak"
-  quote = "Membangun solusi digital yang efisien, terukur, dan berfokus pada pengalaman pengguna."
+  name = "Wakhid Wichaksono"
+  title = "WordPress Development"
+  quote = ""
   photo = "https://placehold.co/120x120/1f2937/ffffff?text=DEV"
 
 # ======================
@@ -31,7 +31,7 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 [[params.links]]
   icon = "facebook"
   text = "Facebook"
-  url = "https://facebook.com/username"
+  url = "https://www.facebook.com/groups/2368671900122872"
   newtab = true
 
 [[params.links]]
@@ -43,7 +43,7 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 [[params.links]]
   icon = "message-circle-code"
   text = "WhatsApp"
-  url = "https://wa.me/6281234567890"
+  url = "https://wa.me/6282244274544"
   newtab = true
 
 [[params.links]]
@@ -52,29 +52,6 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   url = "/about"
   newtab = false
 
-
-# ======================
-#  Sosial Media / Kontak
-# ======================
-[[params.socials]]
-  icon = "github"
-  url  = "https://github.com/username"
-  label = "GitHub"
-
-[[params.socials]]
-  icon = "linkedin"
-  url  = "https://linkedin.com/in/username"
-  label = "LinkedIn"
-
-[[params.socials]]
-  icon = "facebook"
-  url  = "https://facebook.com/username"
-  label = "Facebook"
-
-[[params.socials]]
-  icon = "mail"
-  url  = "mailto:emailanda@example.com"
-  label = "Email"
 
 # ======================
 #  FLOATING NAVIGATION
