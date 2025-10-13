@@ -103,7 +103,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {{ range first 2 (where .Site.RegularPages "Section" "projects") }}
+      {{ range first 4 (where .Site.RegularPages "Section" "projects") }}
         <a href="{{ .RelPermalink }}" class="block bg-gray-900 border border-gray-700 rounded-xl p-6 hover:border-blue-500 transition">
           {{ with .Params.thumbnail }}
             <img src="{{ . }}" alt="{{ $.Title }}" class="rounded-lg mb-4">
