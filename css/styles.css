@@ -209,11 +209,27 @@ article th {
   white-space: nowrap;
 }
 
+.summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;   /* jumlah maksimum baris */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Pada browser yang mendukung line-clamp, hapus white-space agar 2 baris berfungsi */
 @supports (-webkit-line-clamp: 2) {
   .title { white-space: normal; }
 }
 
+.highlight pre {
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+}
+
+.highlight pre > code {
+  background-color: transparent;
+}
 
 /* ================================
    Responsive Spacer (Mobile Nav)
@@ -221,5 +237,12 @@ article th {
 @media (max-width: 640px) {
   .mobile-nav-spacer {
     height: 4.5rem;
+  }
+
+  article table {
+    display: block;              /* penting untuk responsif */
+    overflow-x: auto;            /* scroll horizontal di layar kecil */
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;         /* cegah teks pecah baris */
   }
 }
