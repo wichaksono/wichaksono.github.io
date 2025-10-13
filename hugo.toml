@@ -79,14 +79,14 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   id = "services"
 
 [[params.floatingnav.items]]
-  icon = "monitor"
-  label = "Portfolio"
+  icon = "folder-code"
+  label = "My Works"
   url = "/projects"
   id = "portfolio"
 
 [[params.floatingnav.items]]
-  icon = "pencil"
-  label = "Blog"
+  icon = "notebook-pen"
+  label = "Articles"
   url = "/blog"
   id = "blog"
 

@@ -1,8 +1,6 @@
 {{ define "main" }}
 <header class="mb-12 border-b border-gray-700 pb-6">
-    <a href="/blog/" class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200">
-      <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Kembali ke Blog
-    </a>
+    {{ partial "breadcrumbs.html" . }}
 
     <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight">
       {{ .Title }}
@@ -33,15 +31,18 @@
 
 {{ with .Params.tags }}
 <div class="flex flex-wrap items-center gap-2 mt-12">
-    <span class="text-sm font-semibold text-gray-300 inline-block">
-        Tags:
-    </span>
-    {{ range . }}
-    <span class="text-sm font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 inline-block">
-        {{ . }}
-    </span>
-    {{ end }}
+  <span class="text-sm font-semibold text-gray-300 inline-block">
+    Tags:
+  </span>
+
+  {{ range . }}
+    <a href="{{ "/tags/" | relURL }}{{ lower (urlize .) }}/"
+       class="text-sm font-semibold px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 hover:bg-blue-800/70 transition">
+      {{ . }}
+    </a>
+  {{ end }}
 </div>
 {{ end }}
+
 
 {{ end }}

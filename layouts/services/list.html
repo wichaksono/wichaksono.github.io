@@ -1,15 +1,11 @@
 {{ define "main" }}
 
 <header class="mb-12 border-b border-gray-700 pb-6">
-  <a href="/" class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200">
-    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Kembali ke Halaman Utama
-  </a>
+  {{ partial "breadcrumbs.html" . }}
 
-  <h1 class="text-4xl font-extrabold text-white mb-2">Layanan Website</h1>
-  {{ with .Params.description }}
+  <h1 class="text-4xl font-extrabold text-white mb-2">{{ .Title }}</h1>
+  {{ with .Params.Summary }}
     <p class="text-lg text-gray-400">{{ . }}</p>
-  {{ else }}
-    <p class="text-lg text-gray-400">Layanan profesional untuk perbaikan, pengembangan, dan optimasi website Anda.</p>
   {{ end }}
 </header>
 

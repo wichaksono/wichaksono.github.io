@@ -1,16 +1,12 @@
 {{ define "main" }}
   <!-- Header -->
   <header class="mb-12 border-b border-gray-700 pb-6">
-    <a href="/blog/" 
-       class="inline-flex items-center mb-4 text-blue-400 hover:text-blue-300 font-medium transition duration-200">
-      <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i>
-      Kembali ke Blog
-    </a>
+    {{ partial "breadcrumbs.html" . }}
     <h1 class="text-4xl font-extrabold text-white mb-2">Tag: {{ .Title }}</h1>
   </header>
 
   <!-- Daftar Artikel -->
-  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <section class="grid grid-cols-1 gap-6">
     {{ range .Pages }}
       <a href="{{ .RelPermalink }}" 
          class="block bg-gray-900 border border-gray-700 rounded-xl p-6 hover:border-blue-500 transition shadow-md hover:shadow-blue-900/20">

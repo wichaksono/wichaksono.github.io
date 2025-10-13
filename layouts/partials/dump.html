@@ -1,0 +1,14 @@
+<pre class="bg-gray-900 text-gray-200 text-xs p-4 rounded overflow-x-auto">
+Kind: {{ .Kind }}
+Section: {{ .Section }}
+Type: {{ .Type }}
+Title: {{ .Title }}
+Data.Plural: {{ .Data.Plural }}
+Data.Singular: {{ .Data.Singular }}
+Data.Terms: {{ .Data.Terms }}
+{{ with .File }}
+File: {{ .Path }}
+{{ else }}
+File: (no file for this kind)
+{{ end }}
+</pre>

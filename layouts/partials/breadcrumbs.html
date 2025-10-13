@@ -1,0 +1,46 @@
+<nav class="flex flex-wrap items-center text-sm text-gray-400 mb-6 gap-x-2 gap-y-1" aria-label="Breadcrumb">
+  <!-- HOME -->
+  <a href="/" class="flex items-center hover:text-blue-400">
+    <i data-lucide="home" class="w-4 h-4"></i>
+  </a>
+
+  {{/* SECTION PAGES (ex: /projects/, /blog/, /services/) */}}
+  {{ if eq .Kind "section" }}
+    <span class="text-gray-600">/</span>
+    <span class="text-gray-300 capitalize">{{ humanize .Section }}</span>
+
+  {{/* TAXONOMY LIST (ex: /projects/tags/, /tags/) */}}
+  {{ else if eq .Kind "taxonomy" }}
+    {{ $sec := .Section }}
+    {{ if and $sec (ne $sec "tags") }}
+      <span class="text-gray-600">/</span>
+      <a href="/{{ $sec }}/" class="hover:text-blue-400 capitalize">{{ humanize $sec }}</a>
+    {{ end }}
+    <span class="text-gray-600">/</span>
+    <span class="text-gray-300 capitalize">{{ humanize .Data.Plural }}</span>
+
+  {{/* TERM PAGE (ex: /projects/tags/web/, /tags/phpstorm/) */}}
+  {{ else if eq .Kind "term" }}
+    {{ $sec := .Section }}
+    {{ if and $sec (ne $sec "tags") }}
+      <span class="text-gray-600">/</span>
+      <a href="/{{ $sec }}/" class="hover:text-blue-400 capitalize">{{ humanize $sec }}</a>
+      <span class="text-gray-600">/</span>
+      <a href="/{{ $sec }}/tags/" class="hover:text-blue-400 capitalize">Tags</a>
+    {{ else }}
+      <span class="text-gray-600">/</span>
+      <a href="/tags/" class="hover:text-blue-400 capitalize">Tags</a>
+    {{ end }}
+    <span class="text-gray-600">/</span>
+    <span class="text-gray-300 capitalize">{{ .Title }}</span>
+
+  {{/* SINGLE CONTENT (ex: /projects/proyek-a/, /blog/artikel/) */}}
+  {{ else }}
+    {{ if .Section }}
+      <span class="text-gray-600">/</span>
+      <a href="/{{ .Section }}/" class="hover:text-blue-400 capitalize">{{ humanize .Section }}</a>
+      <span class="text-gray-600">/</span>
+    {{ end }}
+    <span class="text-gray-300 break-words leading-snug">{{ .Title }}</span>
+  {{ end }}
+</nav>
