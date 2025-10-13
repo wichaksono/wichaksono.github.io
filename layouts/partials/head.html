@@ -1,13 +1,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>{{ .Site.Title }}</title>
+<title>{{ if and .Title (ne .Title "") }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
 
 {{/* Description fallback: page -> site.params -> site.title */}}
-{{ if .Params.description }}
-  <meta name="description" content="{{ .Params.description }}">
-{{ else if .Site.Params.description }}
-  <meta name="description" content="{{ .Site.Params.description }}">
+{{ if .Params.summary }}
+  <meta name="description" content="{{ .Params.summary }}">
+{{ else if .Site.Params.summary }}
+  <meta name="description" content="{{ .Site.Params.summary }}">
 {{ else }}
   <meta name="description" content="{{ .Site.Title }}">
 {{ end }}
@@ -32,10 +32,10 @@
 <meta property="og:title" content="{{ .Title | default .Site.Title }}">
 <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{ if .Params.description }}
-  <meta property="og:description" content="{{ .Params.description }}">
-{{ else if .Site.Params.description }}
-  <meta property="og:description" content="{{ .Site.Params.description }}">
+{{ if .Params.summary }}
+  <meta property="og:description" content="{{ .Params.summary }}">
+{{ else if .Site.Params.summary }}
+  <meta property="og:description" content="{{ .Site.Params.summary }}">
 {{ end }}
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode | default "en_US" }}">
@@ -51,10 +51,10 @@
 {{/* Twitter */}}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ .Title | default .Site.Title }}">
-{{ if .Params.description }}
-  <meta name="twitter:description" content="{{ .Params.description }}">
-{{ else if .Site.Params.description }}
-  <meta name="twitter:description" content="{{ .Site.Params.description }}">
+{{ if .Params.summary }}
+  <meta name="twitter:description" content="{{ .Params.summary }}">
+{{ else if .Site.Params.summary }}
+  <meta name="twitter:description" content="{{ .Site.Params.summary }}">
 {{ end }}
 
 {{ if .Params.og_image }}
@@ -65,6 +65,8 @@
   <meta name="twitter:image" content="{{ .Site.Params.og_image | absURL }}">
 {{ end }}
 
-<meta name="theme-color" content="#ffffff">
+{{ if .Site.Params.theme_color }}
+<meta name="theme-color" content="{{ .Site.Params.theme_color }}">
+{{ end }}
 
 {{ block "head_extra" . }}{{ end }}

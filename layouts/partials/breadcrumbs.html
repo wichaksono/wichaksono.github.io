@@ -40,6 +40,8 @@
       <span class="text-gray-600">/</span>
       <a href="/{{ .Section }}/" class="hover:text-blue-400 capitalize">{{ humanize .Section }}</a>
       <span class="text-gray-600">/</span>
+    {{ else }}
+      <span class="text-gray-600">/</span>
     {{ end }}
     <span class="text-gray-300 break-words leading-snug">{{ .Title }}</span>
   {{ end }}

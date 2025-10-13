@@ -1,6 +1,4 @@
 ---
-title: "Welcome"
+title: "Hallo Bosku"
+summary: "Ini deskripsi"
 ---
-
-# Welcome to My Hugo Site
-We build modern websites with Hugo and Bootstrap.

@@ -11,8 +11,9 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   project_tag = "projects/tags"
 
 [params]
-  description = "Fast, secure websites built with Hugo + Bootstrap"
+  summary = "Fast, secure websites built with Hugo + Bootstrap"
   og_image = "/images/og-default.jpg"
+  theme_color= "#ffffff"
   home_url = "#"
   project_url = "#"
   blog_url = "#"
