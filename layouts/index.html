@@ -31,7 +31,7 @@
       <a 
         href="{{ .url }}" 
         {{ if .newtab }}target="_blank" rel="noopener noreferrer"{{ end }}
-        class="flex items-center justify-center p-4 bg-gray-800 rounded-xl text-white font-semibold shadow-md border-2 border-transparent hover:border-blue-500 transition"
+        class="flex items-center justify-center p-4 bg-gray-800 rounded-xl text-white font-semibold shadow-md border-2 border-transparent transition hover:border-blue-500 link-card"
       >
         <i data-lucide="{{ .icon }}" class="w-5 h-5 mr-3 text-blue-400"></i>
         {{ .text }}
@@ -82,69 +82,4 @@
     </div>
   </section>
 
-
-  <!-- Section: Projects -->
-  <section class="mt-16">
-    <div class="mb-8">
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
-          Proyek Terbaru
-        </h2>
-        <a href="/projects/" 
-           class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition duration-200">
-          Lihat Semua
-          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-        </a>
-      </div>
-
-      <p class="text-gray-400 max-w-xl text-center sm:text-left mx-auto sm:mx-0">
-        Beberapa proyek terbaru yang telah saya kerjakan — mulai dari website bisnis, landing page, hingga sistem custom menggunakan Hugo dan Laravel.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {{ range first 4 (where .Site.RegularPages "Section" "projects") }}
-        <a href="{{ .RelPermalink }}" class="block bg-gray-900 border border-gray-700 rounded-xl p-6 hover:border-blue-500 transition">
-          {{ with .Params.thumbnail }}
-            <img src="{{ . }}" alt="{{ $.Title }}" class="rounded-lg mb-4">
-          {{ end }}
-          <h3 class="text-xl font-bold text-blue-400 mb-2 title">{{ .Title }}</h3>
-          <p class="text-sm text-gray-400 line-clamp-3">{{ .Params.summary }}</p>
-        </a>
-      {{ end }}
-    </div>
-  </section>
-
-
-  <!-- Section: Blog -->
-  <section class="mt-16">
-    <div class="mb-8">
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
-          Tulisan Terbaru
-        </h2>
-        <a href="/blog/" 
-           class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition duration-200">
-          Lihat Semua
-          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-        </a>
-      </div>
-
-      <p class="text-gray-400 max-w-xl text-center sm:text-left mx-auto sm:mx-0">
-        Baca tulisan seputar pengembangan website, optimasi performa, hingga tips teknis seputar WordPress dan pemrograman web modern.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {{ range first 2 (sort (where .Site.RegularPages "Section" "blog") "Date" "desc") }}
-        <a href="{{ .RelPermalink }}" class="block bg-gray-900 border border-gray-700 rounded-xl p-6 hover:border-blue-500 transition">
-          <h3 class="text-xl font-bold text-blue-400 mb-2 title">{{ .Title }}</h3>
-          <p class="text-sm text-gray-400 mb-4 line-clamp-3">{{ .Params.summary }}</p>
-          <div class="flex items-center text-xs text-gray-500">
-            <i data-lucide="calendar" class="w-3 h-3 mr-1.5"></i> {{ .Date.Format "2 Jan 2006" }}
-          </div>
-        </a>
-      {{ end }}
-    </div>
-  </section>
 {{ end }}

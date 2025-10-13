@@ -1,6 +1,6 @@
 baseURL = "https://wichaksono.github.io/"
 languageCode = "en-us"
-title = "Wichaksono W"
+title = "Wichaksono WP Development"
 ignoreLogs = ["warning-goldmark-raw-html"]
 
 [pagination]
@@ -19,7 +19,7 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   contact_url = "#"
 
 [params.profile]
-  name = "Wakhid Wichaksono"
+  name = "Wakhid Wicaksono"
   title = "WordPress Development"
   quote = ""
   photo = "https://placehold.co/120x120/1f2937/ffffff?text=DEV"
@@ -47,8 +47,20 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   newtab = true
 
 [[params.links]]
-  icon = "badge-info"
-  text = "About me"
+  icon = "folder-code"
+  text = "Featured Works"
+  url = "/projects"
+  newtab = false
+
+[[params.links]]
+  icon = "notebook-pen"
+  text = "Articles"
+  url = "/blog"
+  newtab = false
+
+[[params.links]]
+  icon = "user"
+  text = "Who I Am"
   url = "/about"
   newtab = false
 
