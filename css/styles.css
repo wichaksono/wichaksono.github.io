@@ -20,15 +20,32 @@ main {
    Link Card / Button Link
 ================================ */
 .link-card {
-  transition: all 0.3s ease;
+    /* Subtle gradient background */
+    background: linear-gradient(145deg, #2a3a50, #1c2738);
+    border: 1px solid #374151;
+    /* Base shadow for depth */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0,0,0,0.1);
+    /* Smooth transitions for all properties */
+    transition: all 0.3s ease;
+    color: #9CA3AF; /* text-gray-400 */
 }
-
 .link-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3),
-              0 4px 6px -2px rgba(37, 99, 235, 0.1);
+  color: #E5E7EB; /* Brighter color */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3),
+                0 4px 6px -2px rgba(37, 99, 235, 0.1);
 }
-
+/* Icon styling */
+.link-card svg {
+    
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+/* Interactive icon animation on hover */
+.link-card:hover svg {
+    
+    /* Rotate and scale up the icon */
+    transform: rotate(-10deg) scale(1.1);
+}
 /* ================================
    Artikel & Project Card
 ================================ */
