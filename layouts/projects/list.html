@@ -65,7 +65,7 @@
             <img src="{{ . }}" alt="{{ $.Title }}" class="rounded-lg mb-4">
           {{ end }}
           <h2 class="text-xl font-bold text-blue-400 mb-2">{{ .Title }}</h2>
-          <p class="text-sm text-gray-400 mb-3">{{ .Params.summary }}</p>
+          <p class="text-sm text-gray-400 mb-3 line-clamp-3">{{ .Params.summary }}</p>
         </a>
       {{ end }}
     </section>
