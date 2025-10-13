@@ -16,7 +16,9 @@
   </header>
   {{ end }}
 
-  {{ $paginator := .Paginate .Pages }}
+  <!-- Urut berdasarkan tanggal terbaru -->
+  {{ $sortedPages := sort .Pages "Date" "desc" }}
+  {{ $paginator := .Paginate $sortedPages }}
 
   <!-- Daftar Artikel -->
   <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -86,5 +88,4 @@
     </ul>
   </nav>
   {{ end }}
-
 {{ end }}
