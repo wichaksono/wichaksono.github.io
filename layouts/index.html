@@ -25,23 +25,35 @@
 
   </header>
 
-  <!-- Daftar Tautan Utama -->
-  <section class="space-y-4" id="contact">
+  <!-- Daftar Tautan Utama (Versi Ikon Saja) -->
+  <section class="flex flex-wrap justify-center gap-4" id="contact">
     {{ range .Site.Params.links }}
       <a 
         href="{{ .url }}" 
         {{ if .newtab }}target="_blank" rel="noopener noreferrer"{{ end }}
-        class="flex items-center justify-center p-4 bg-gray-800 rounded-xl text-white font-semibold shadow-md border-2 border-transparent transition hover:border-blue-500 link-card"
+        title="{{ .text }}"
+        class="flex items-center justify-center w-12 h-12 bg-gray-800 rounded-xl text-white shadow-md border-2 border-transparent transition hover:border-blue-500 hover:scale-110 active:scale-95"
       >
-        <i data-lucide="{{ .icon }}" class="w-5 h-5 mr-3 text-blue-400"></i>
-        {{ .text }}
+        <i data-lucide="{{ .icon }}" class="w-6 h-6 text-blue-400"></i>
       </a>
     {{ end }}
   </section>
 
+<!-- CTA Button -->
+<div class="mt-12 text-center">
+  <a
+    href="https://facebook.com/bocahapi"
+    target="_blank"
+    rel="noopener noreferrer nofollow"
+    class="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition shadow-lg hover:shadow-blue-900/30"
+  >
+    Konsultasi Sekarang
+    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+  </a>
+</div>
 
   <!-- Section: Services -->
-  <section class="mt-16">
+  <section class="mt-12">
     <div class="mb-8">
       <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
         <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
@@ -61,24 +73,133 @@
     <div class="space-y-4 max-w-3xl mx-auto">
       {{ range first 3 (sort (where .Site.RegularPages "Section" "services") ".Params.order" "asc") }}
         <a href="{{ .RelPermalink }}" 
-          class="flex items-start bg-gray-900 border border-gray-700 hover:border-blue-500 rounded-xl p-5 sm:p-6 shadow-lg hover:shadow-blue-900/20 transition duration-300">
+          class="flex items-start gap-5 bg-gray-900 border border-gray-800 hover:border-blue-500 rounded-xl p-5 shadow-md hover:shadow-blue-900/20 transition">
           
           {{ with .Params.icon }}
-            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-900/50 border border-blue-700 text-blue-400 mr-4">
+            <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-lg bg-blue-900/40 border border-blue-800 text-blue-400">
               <i data-lucide="{{ . }}" class="w-5 h-5"></i>
             </div>
           {{ end }}
 
-          <div>
-            <h3 class="text-lg font-bold text-blue-400 mb-1">{{ .Title }}</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-2">{{ .Params.summary }}</p>
-            <span class="inline-flex items-center text-blue-400 hover:text-blue-300 text-sm font-medium transition">
-              Selengkapnya
-              <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-            </span>
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold text-blue-400 mb-1">
+              {{ .Title }}
+            </h3>
+
+            <p class="text-gray-400 text-sm leading-relaxed mb-2">
+              {{ .Params.summary }}
+            </p>
+
+            {{ with .Params.price.start }}
+              <p class="text-sm text-gray-300 text-end">
+                Start from <span class="font-semibold text-blue-400">{{ . }}</span>
+              </p>
+            {{ end }}
           </div>
         </a>
       {{ end }}
+    </div>
+
+    <div class="mt-5 text-center">
+  <a
+    href="/services"
+    class="inline-flex items-center gap-2 px-7 py-3 rounded-xl border border-blue-500 text-blue-400 font-semibold transition hover:bg-blue-500/10 hover:text-blue-300"
+  >
+    Lihat Semua Layanan
+    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+  </a>
+</div>
+
+  </section>
+
+  <section class="max-w-3xl mx-auto mt-12">
+    <!-- Header -->
+    <h2 class="text-3xl font-semibold text-white mb-2">
+      Tulisan Saya
+    </h2>
+    <p class="text-gray-400 mb-8">
+      Daftar blog tempat saya berkontribusi sebagai penulis aktif
+    </p>
+
+    <!-- Author List (linear) -->
+    <div class="space-y-3 mb-14">
+      <a
+        href="#"
+        class="flex items-center justify-between bg-gray-900/60 border border-gray-800 rounded-xl px-5 py-4 hover:border-blue-500 transition"
+      >
+        <span class="text-white font-medium">
+          Profil Penulis di BlogTekno
+        </span>
+        <i data-lucide="arrow-right" class="w-4 h-4 text-blue-400"></i>
+      </a>
+
+      <a
+        href="#"
+        class="flex items-center justify-between bg-gray-900/60 border border-gray-800 rounded-xl px-5 py-4 hover:border-blue-500 transition"
+      >
+        <span class="text-white font-medium">
+          Profil Penulis di WP-Media ID
+        </span>
+        <i data-lucide="arrow-right" class="w-4 h-4 text-blue-400"></i>
+      </a>
+
+      <a
+        href="#"
+        class="flex items-center justify-between bg-gray-900/60 border border-gray-800 rounded-xl px-5 py-4 hover:border-blue-500 transition"
+      >
+        <span class="text-white font-medium">
+          Profil Penulis di DevJournal
+        </span>
+        <i data-lucide="arrow-right" class="w-4 h-4 text-blue-400"></i>
+      </a>
+    </div>
+
+  </section>
+
+  <!-- Recommendations -->
+  <section class="max-w-4xl mx-auto mt-12">
+    <h3 class="text-sm font-semibold text-center text-gray-400 tracking-wider mb-6">
+      REKOMENDASI HOSTING & THEME
+    </h3>
+
+    <div class="flex flex-col sm:flex-row gap-6">
+      <!-- Cloud Hosting -->
+      <a
+        href="#"
+        class="flex-1 border border-blue-500/60 rounded-2xl px-6 py-5 transition hover:border-blue-400"
+      >
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500/20 text-blue-400">
+            <i data-lucide="server" class="w-5 h-5"></i>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">
+          Cloud Hosting
+        </p>
+        <p class="text-white font-semibold text-lg">
+          -
+        </p>
+      </a>
+
+      <!-- Premium Theme -->
+      <a
+        href="#"
+        class="flex-1 border border-gray-700 rounded-2xl px-6 py-5 transition hover:border-purple-400"
+      >
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-9 h-9 flex items-center justify-center rounded-lg bg-purple-500/20 text-purple-400">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">
+          Premium Theme
+        </p>
+        <p class="text-white font-semibold text-lg">
+          -
+        </p>
+      </a>
     </div>
   </section>
 

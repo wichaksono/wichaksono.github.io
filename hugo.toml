@@ -32,35 +32,29 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 [[params.links]]
   icon = "facebook"
   text = "Facebook"
-  url = "https://www.facebook.com/groups/2368671900122872"
+  url = "https://www.facebook.com/bocahapi"
+  newtab = true
+
+[[params.links]]
+  icon = "linkedin"
+  text = "Linked In"
+  url = "https://www.linkedin.com/in/wakhid-wicaksono-5514a369/"
   newtab = true
 
 [[params.links]]
   icon = "youtube"
   text = "YouTube"
-  url = "https://youtube.com/@username"
+  url = "#"
   newtab = true
 
 [[params.links]]
-  icon = "message-circle-code"
-  text = "WhatsApp"
-  url = "https://wa.me/6282244274544"
+  icon = "github"
+  text = "Github"
+  url = "https://github.com/wichaksono/"
   newtab = true
 
 [[params.links]]
-  icon = "folder-code"
-  text = "Featured Works"
-  url = "/projects"
-  newtab = false
-
-[[params.links]]
-  icon = "notebook-pen"
-  text = "Articles"
-  url = "/blog"
-  newtab = false
-
-[[params.links]]
-  icon = "user"
+  icon = "circle-user"
   text = "Who I Am"
   url = "/about"
   newtab = false
@@ -72,6 +66,13 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 [params.floatingnav]
   enabled = true
   active = "contact" # bisa: home, portfolio, blog, contact
+
+[[params.floatingnav.items]]
+  icon = "home"
+  label = "Home"
+  url = "/"
+  id = "home"
+
 
 [[params.floatingnav.items]]
   icon = "hammer"
@@ -86,13 +87,7 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   id = "portfolio"
 
 [[params.floatingnav.items]]
-  icon = "notebook-pen"
-  label = "Articles"
-  url = "/blog"
-  id = "blog"
-
-[[params.floatingnav.items]]
-  icon = "message-square-code"
-  label = "Contact"
-  url = "/"
-  id = "contact"
+  icon = "circle-user"
+  label = "About Me"
+  url = "/about"
+  id = "about-me"
