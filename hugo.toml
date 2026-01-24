@@ -6,24 +6,36 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 [pagination]
   pagerSize = 6
 
-[taxonomies]
-  tag = "tags"
-  project_tag = "projects/tags"
+[params.contact_whatsapp]
+  number = "6285117688663"
+
+  name_placeholder = "Nama Anda"
+  message_placeholder = "Ceritakan kebutuhan Anda"
+
+  message_template = "Halo, saya [[name]]\n\nLayanan: [[service]]\n\nPesan:\n[[message]]"
+
+  services = [
+    "Tambah Fungsi Custom",
+    "Perbaikan Bug / Tema Konflik",
+    "Perbaikan Tampilan Error",
+    "Hapus Malware / Redirect Jahat",
+    "Maintenance Website WordPress Bulanan",
+    "Plugin WordPress Custom",
+    "Lainnya"
+  ]
+
+
 
 [params]
-  summary = "Fast, secure websites built with Hugo + Bootstrap"
-  og_image = "/images/og-default.jpg"
-  theme_color= "#ffffff"
-  home_url = "#"
-  project_url = "#"
-  blog_url = "#"
-  contact_url = "#"
-
+  summary = ""
+  og_image = "https://media.licdn.com/dms/image/v2/C5103AQHNo-Qnfs4i_Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1540986016761?e=1770854400&v=beta&t=BeBXXJrTaKsp-1ebLqnyR8XdyGGNVMkrTLzdEzU_w68"
+  theme_color= "#0d1117"
+  
 [params.profile]
   name = "Wakhid Wicaksono"
   title = "WordPress Development"
   quote = ""
-  photo = "https://placehold.co/120x120/1f2937/ffffff?text=DEV"
+  photo = "https://media.licdn.com/dms/image/v2/C5103AQHNo-Qnfs4i_Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1540986016761?e=1770854400&v=beta&t=BeBXXJrTaKsp-1ebLqnyR8XdyGGNVMkrTLzdEzU_w68"
 
 # ======================
 #  Link Utama (Tombol)
@@ -59,6 +71,45 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   url = "/about"
   newtab = false
 
+# ======================
+#  MY WORKS SECTION
+# ======================
+[[params.my_works]]
+  label = "Karya Saya"
+  description = "Daftar tempat saya berkarya:"
+  active = true
+
+[[params.my_works.items]]
+  title = "Open-source & Free Resources"
+  subtitle = "Kumpulan project dan eksperimen WordPress di GitHub"
+  logo = "https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"
+  url = "https://github.com/wichaksono/"
+
+[[params.my_works.items]]
+  title = "NeonWebID"
+  subtitle = "Kontribusi artikel & tulisan teknis WordPress"
+  logo = "https://neon.web.id/wp-content/uploads/2023/09/cropped-neon-icon-blue.png"
+  url = "https://neon.web.id/author/wichaksonow/"
+
+# ======================
+#  PROMOTION SECTION
+# ======================
+[[params.promotions]]
+  label = "TOOLS & RESOURCE YANG SAYA GUNAKAN"
+  active = false
+
+[[params.promotions.items]]
+  title = "Theme WordPress Ringan & Stabil"
+  banner = "/images/tools/theme-co-id-banner.jpg"
+  url = "https://theme.co.id"
+
+
+[[params.promotions.items]]
+  title = "Cloud Hosting untuk WordPress"
+  banner = "/images/tools/warna-host-banner.jpg"
+  url = "https://my.warnahost.com/?ref=2915"
+
+
 
 # ======================
 #  FLOATING NAVIGATION
@@ -79,12 +130,6 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   label = "Services"
   url = "/services"
   id = "services"
-
-[[params.floatingnav.items]]
-  icon = "folder-code"
-  label = "My Works"
-  url = "/projects"
-  id = "portfolio"
 
 [[params.floatingnav.items]]
   icon = "circle-user"

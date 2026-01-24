@@ -5,8 +5,8 @@ icon: "blocks"
 order: 6
 
 cta:
-  text: "Diskusikan Pembuatan Plugin Anda"
-  url: "/#contact"
+  text: "Diskusikan Kebutuhan Custom Anda"
+  selected: "Plugin WordPress Custom"
 
 features_title: "Keunggulan Plugin Custom"
 features:

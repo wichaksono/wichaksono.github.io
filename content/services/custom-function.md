@@ -6,7 +6,7 @@ order: 1
 
 cta:
   text: "Diskusikan Kebutuhan Custom Anda"
-  url: "/#contact"
+  selected: "Tambah Fungsi Custom"
 
 features_title: "Contoh Fungsi yang Bisa Dibuat"
 features:

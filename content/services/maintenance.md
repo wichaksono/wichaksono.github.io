@@ -5,8 +5,8 @@ icon: "refresh-cw"
 order: 5
 
 cta:
-  text: "Daftar Layanan Maintenance Sekarang"
-  url: "/#contact"
+  text: "Diskusikan Kebutuhan Maintenance Website"
+  selected: "Maintenance Website WordPress Bulanan"
 
 features_title: "Apa yang Termasuk dalam Maintenance"
 features:

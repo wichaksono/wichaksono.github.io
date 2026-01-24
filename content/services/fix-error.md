@@ -5,8 +5,8 @@ icon: "layout-dashboard"
 order: 3
 
 cta:
-  text: "Konsultasikan Masalah Tampilan Anda"
-  url: "/#contact"
+  text: "Diskusikan Error Website"
+  selected: "Perbaikan Tampilan Error"
 
 features_title: "Masalah Tampilan yang Sering Terjadi"
 features:

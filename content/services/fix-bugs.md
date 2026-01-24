@@ -5,8 +5,8 @@ icon: "bug"
 order: 2
 
 cta:
-  text: "Laporkan Masalah Website Anda"
-  url: "/#contact"
+  text: "Diskusikan Perbaikan Website"
+  selected: "Perbaikan Bug / Tema Konflik"
 
 features_title: "Masalah Umum yang Sering Terjadi"
 features:

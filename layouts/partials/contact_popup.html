@@ -1,0 +1,12 @@
+{{ $text := .text | default "Konsultasi via WhatsApp" }}
+{{ $selected := .selected }}
+
+<button
+  type="button"
+  data-open-contact
+  {{ with $selected }}data-selected-service="{{ . }}"{{ end }}
+  class="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 gap-2 rounded-lg mt-4 transition duration-200"
+>
+  <i data-lucide="message-circle" class="w-4 h-4"></i>
+  {{ $text }}
+</button>
