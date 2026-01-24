@@ -5,26 +5,25 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo tanpa submodule
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      # Setup Hugo
       - uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.128.2'
           extended: true
 
-      # Build Hugo site
       - run: hugo --minify
 
-      # Deploy ke GitHub Pages
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -33,4 +32,3 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           disable_nojekyll: true
-
