@@ -1,6 +1,6 @@
 baseURL = "https://wichaksono.github.io/"
 languageCode = "en-us"
-title = "Wichaksono WP Development"
+title = "Wichaksono WP Developer"
 ignoreLogs = ["warning-goldmark-raw-html"]
 
 [pagination]
@@ -33,7 +33,7 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   
 [params.profile]
   name = "Wakhid Wicaksono"
-  title = "WordPress Development"
+  title = "WordPress Specialist · Custom Development & Maintenance"
   quote = ""
   photo = "https://media.licdn.com/dms/image/v2/C5103AQHNo-Qnfs4i_Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1540986016761?e=1770854400&v=beta&t=BeBXXJrTaKsp-1ebLqnyR8XdyGGNVMkrTLzdEzU_w68"
 

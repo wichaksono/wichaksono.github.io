@@ -1,5 +1,19 @@
-{{ $text := .text | default "Konsultasi via WhatsApp" }}
-{{ $selected := .selected }}
+{{/* 
+  contact_popup partial
+  Aman dipanggil dari:
+  - homepage
+  - single page
+  - section page
+*/}}
+
+{{ $text := "Konsultasi via WhatsApp" }}
+{{ $selected := "" }}
+
+{{/* Kalau data yang dikirim punya field text */}}
+{{ if and (ne . nil) (reflect.IsMap .) }}
+  {{ with .text }}{{ $text = . }}{{ end }}
+  {{ with .selected }}{{ $selected = . }}{{ end }}
+{{ end }}
 
 <button
   type="button"

@@ -112,9 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
   form.onsubmit = e => {
     e.preventDefault();
 
-    const name = waName.value;
-    const service = waService.value;
-    const message = waMessage.value;
+    const name = document.getElementById("wa-name").value.trim();
+    const service = document.getElementById("wa-service").value;
+    const message = document.getElementById("wa-message").value.trim();
 
     let text = template
       .replaceAll("[[name]]", name)
@@ -128,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     close();
   };
+  
 });
 </script>
 
