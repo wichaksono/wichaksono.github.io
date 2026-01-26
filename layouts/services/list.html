@@ -22,29 +22,24 @@
       </div>
     {{ end }}
 
-<!-- Konten -->
-<div class="flex-1">
-  <h3 class="text-lg font-bold text-blue-400 mb-1 group-hover:text-blue-300 transition">
-    {{ .Title }}
-  </h3>
+  <!-- Konten -->
+  <div class="flex-1">
+    <h3 class="text-lg font-bold text-blue-400 mb-1 group-hover:text-blue-300 transition">
+      {{ .Title }}
+    </h3>
 
-  {{ with .Params.summary }}
-    <p class="text-sm text-gray-400 leading-relaxed mb-2">{{ . }}</p>
-  {{ end }}
-
-  <div class="flex items-center justify-between">
-    <span class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium text-sm transition">
-      Lihat Detail
-      <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-    </span>
-
-    {{ with .Params.price.start }}
-      <span class="text-sm font-medium text-blue-400">
-        <span class="text-white">Start from</span> <b>{{ . }}</b>
-      </span>
+    {{ with .Params.summary }}
+      <p class="text-sm text-gray-400 leading-relaxed mb-2">{{ . }}</p>
     {{ end }}
+
+    <div class="flex items-center justify-end mt-6">
+      {{ with .Params.price.start }}
+        <span class="text-sm font-medium text-blue-400">
+          <span class="text-white">Start from</span> <b>{{ . }}</b>
+        </span>
+      {{ end }}
+    </div>
   </div>
-</div>
 
   </a>
   {{ end }}

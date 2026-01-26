@@ -136,3 +136,9 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   label = "About Me"
   url = "/about-me"
   id = "about-me"
+
+[[params.floatingnav.items]]
+  icon = "messages-square"
+  label = "Chat Me"
+  url = "https://facebook.com/bocahapi"
+  id = "chat-me"
