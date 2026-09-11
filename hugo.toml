@@ -23,15 +23,17 @@ disableKinds = ["taxonomy", "term"]
 
 [params]
   summary = ""
+  # Social preview image, relative to static/ (1200x630).
+  og_image = "images/og-card.png"
   og_locale = "id_ID"
   theme_color = "#0d1117"
 
 [params.profile]
   name = "Wakhid Wicaksono"
-  title = "WordPress Specialist · Custom Development & Maintenance"
+  title = "Freelance Web Developer & Digital Marketer"
   quote = ""
-  # Square photo inside assets/, e.g. "images/profile.jpg". Empty = initials avatar.
-  photo = ""
+  # Square photo inside assets/. Empty = initials avatar.
+  photo = "images/profile.jpg"
 
 # Primary call to action (hero, service pages, "Chat Me").
 [params.cta]
@@ -114,7 +116,7 @@ disableKinds = ["taxonomy", "term"]
 
 [[params.my_works.items]]
   title = "NeonWebID"
-  subtitle = "Kontribusi artikel & tulisan teknis WordPress"
+  subtitle = "Blogger di neon.web.id · aktif sejak 2015"
   logo = "images/neonwebid.png"
   url = "https://neon.web.id/author/wakhid-wicaksono/"
 
