@@ -7,8 +7,7 @@ summary: "Freelance Web Developer & Digital Marketer — membangun, merawat, dan
 ## Siapa Saya
 
 Saya **Wakhid Wicaksono**, **Freelance Web Developer & Digital Marketer**.
-Latar pendidikan saya **Ilmu Komunikasi (PR & Marcom)** di UMS dan UMPO, jadi saya melihat website dari sisi pelanggan Anda: pesannya jelas, mudah dipakai, dan mengajak mereka menghubungi Anda.
-Sejak 2015 saya aktif menulis di blog [neon.web.id](https://neon.web.id/author/wakhid-wicaksono/).
+Saya membangun dan merawat website yang **cepat, aman, dan mudah dikelola** — lalu membantu website itu ditemukan calon pelanggan di Google.
 
 ---
 
