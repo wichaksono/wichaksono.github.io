@@ -1,15 +1,53 @@
 baseURL = "https://wichaksono.github.io/"
-languageCode = "en-us"
+locale = "id"
 title = "Wichaksono WP Developer"
-ignoreLogs = ["warning-goldmark-raw-html"]
+enableRobotsTXT = true
+# No tags/categories are used; without this Hugo publishes empty /tags/ and /categories/ pages.
+disableKinds = ["taxonomy", "term"]
 
 [pagination]
   pagerSize = 6
 
+# Tailwind CSS is compiled before Hugo runs (see "build" in package.json) into assets/css/app.css.
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  # Icons and the web font come from node_modules (run `pnpm install` first).
+  [[module.mounts]]
+    source = "node_modules/lucide-static/icons"
+    target = "assets/icons"
+  [[module.mounts]]
+    source = "node_modules/@fontsource-variable/inter/files"
+    target = "assets/fonts"
+
+[params]
+  summary = ""
+  og_locale = "id_ID"
+  theme_color = "#0d1117"
+
+[params.profile]
+  name = "Wakhid Wicaksono"
+  title = "WordPress Specialist · Custom Development & Maintenance"
+  quote = ""
+  # Square photo inside assets/, e.g. "images/profile.jpg". Empty = initials avatar.
+  photo = ""
+
+# Primary call to action (hero, service pages, "Chat Me").
+[params.cta]
+  text = "Konsultasi Sekarang"
+  url = "https://facebook.com/bocahapi"
+  icon = "messages-square"
+
+# When enabled, every CTA opens a WhatsApp form instead of params.cta.url.
 [params.contact_whatsapp]
+  enabled = false
   number = "6285117688663"
 
+  name_label = "Nama"
   name_placeholder = "Nama Anda"
+  service_label = "Layanan"
+  message_label = "Pesan"
   message_placeholder = "Ceritakan kebutuhan Anda"
 
   message_template = "Halo, saya [[name]]\n\nLayanan: [[service]]\n\nPesan:\n[[message]]"
@@ -24,21 +62,8 @@ ignoreLogs = ["warning-goldmark-raw-html"]
     "Lainnya"
   ]
 
-
-
-[params]
-  summary = ""
-  og_image = "https://media.licdn.com/dms/image/v2/C5103AQHNo-Qnfs4i_Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1540986016761?e=1770854400&v=beta&t=BeBXXJrTaKsp-1ebLqnyR8XdyGGNVMkrTLzdEzU_w68"
-  theme_color= "#0d1117"
-  
-[params.profile]
-  name = "Wakhid Wicaksono"
-  title = "WordPress Specialist · Custom Development & Maintenance"
-  quote = ""
-  photo = "https://media.licdn.com/dms/image/v2/C5103AQHNo-Qnfs4i_Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1540986016761?e=1770854400&v=beta&t=BeBXXJrTaKsp-1ebLqnyR8XdyGGNVMkrTLzdEzU_w68"
-
 # ======================
-#  Link Utama (Tombol)
+#  Profile links (icon row)
 # ======================
 
 [[params.links]]
@@ -49,7 +74,7 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 
 [[params.links]]
   icon = "linkedin"
-  text = "Linked In"
+  text = "LinkedIn"
   url = "https://www.linkedin.com/in/wakhid-wicaksono-5514a369/"
   newtab = true
 
@@ -61,24 +86,25 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 
 [[params.links]]
   icon = "github"
-  text = "Github"
+  text = "GitHub"
   url = "https://github.com/wichaksono/"
   newtab = true
 
 [[params.links]]
   icon = "circle-user"
   text = "Who I Am"
-  url = "/about-me"
+  url = "/about-me/"
   newtab = false
 
 # ======================
-#  MY WORKS SECTION
+#  My works section
 # ======================
 [[params.my_works]]
   label = "Karya Saya"
   description = "Daftar tempat saya berkarya:"
   active = true
 
+# logo: a path inside assets/ (preferred) or a full URL.
 [[params.my_works.items]]
   title = "Open-source & Free Resources"
   subtitle = "Kumpulan project dan eksperimen WordPress di GitHub"
@@ -92,7 +118,7 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   url = "https://neon.web.id/author/wichaksonow/"
 
 # ======================
-#  PROMOTION SECTION
+#  Promotion section
 # ======================
 [[params.promotions]]
   label = "TOOLS & RESOURCE YANG SAYA GUNAKAN"
@@ -103,42 +129,34 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   banner = "/images/tools/theme-co-id-banner.jpg"
   url = "https://theme.co.id"
 
-
 [[params.promotions.items]]
   title = "Cloud Hosting untuk WordPress"
   banner = "/images/tools/warna-host-banner.jpg"
   url = "https://my.warnahost.com/?ref=2915"
 
-
-
 # ======================
-#  FLOATING NAVIGATION
+#  Bottom navigation (not shown on the home page)
+#  The active item is detected from the current URL.
 # ======================
 [params.floatingnav]
   enabled = true
-  active = "contact" # bisa: home, portfolio, blog, contact
 
 [[params.floatingnav.items]]
-  icon = "home"
+  icon = "house"
   label = "Home"
   url = "/"
-  id = "home"
-
 
 [[params.floatingnav.items]]
   icon = "hammer"
   label = "Services"
-  url = "/services"
-  id = "services"
+  url = "/services/"
 
 [[params.floatingnav.items]]
   icon = "circle-user"
   label = "About Me"
-  url = "/about-me"
-  id = "about-me"
+  url = "/about-me/"
 
 [[params.floatingnav.items]]
   icon = "messages-square"
   label = "Chat Me"
   url = "https://facebook.com/bocahapi"
-  id = "chat-me"

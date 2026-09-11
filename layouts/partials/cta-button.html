@@ -1,11 +1,25 @@
-{{ $text := "Konsultasi Sekarang" }}
+{{- /*
+  Primary call-to-action button.
+  Accepts nil or a dict: text (label), selected (service preselected in the WhatsApp form).
+  Opens the WhatsApp form when params.contact_whatsapp.enabled, otherwise links to params.cta.url.
+*/ -}}
+{{- $cta := site.Params.cta }}
+{{- $text := $cta.text | default "Konsultasi Sekarang" }}
+{{- $selected := "" }}
+{{- if reflect.IsMap . }}
+  {{- with .text }}{{ $text = . }}{{ end }}
+  {{- with .selected }}{{ $selected = . }}{{ end }}
+{{- end }}
+{{- $class := "inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-center font-semibold text-white shadow-lg shadow-accent/20 transition-colors hover:bg-accent-hover" }}
 
-<a
-  href="https://facebook.com/bocahapi"
-  target="_blank"
-  rel="nofollow noopener noreferrer"
-  class="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 gap-2 rounded-lg mt-4 transition duration-200"
->
-  <i data-lucide="messages-square" class="w-6 h-6"></i>
+{{- if site.Params.contact_whatsapp.enabled }}
+<button type="button" data-open-contact {{ with $selected }}data-selected-service="{{ . }}"{{ end }} class="{{ $class }}">
+  {{ partial "icon.html" (dict "name" "message-circle" "class" "size-5") }}
+  {{ $text }}
+</button>
+{{- else }}
+<a href="{{ $cta.url }}" target="_blank" rel="nofollow noopener noreferrer" class="{{ $class }}">
+  {{ partial "icon.html" (dict "name" ($cta.icon | default "messages-square") "class" "size-5") }}
   {{ $text }}
 </a>
+{{- end }}

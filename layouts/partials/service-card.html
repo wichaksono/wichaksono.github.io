@@ -1,0 +1,24 @@
+{{- /* One service in a list. Context: the service page. */ -}}
+<a href="{{ .RelPermalink }}" class="group flex gap-4 rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-accent-fg/60 hover:bg-surface-raised">
+  {{ with .Params.icon }}
+    <div class="grid size-11 shrink-0 place-items-center rounded-xl border border-accent/40 bg-accent/10 text-accent-fg">
+      {{ partial "icon.html" (dict "name" . "class" "size-5") }}
+    </div>
+  {{ end }}
+
+  <div class="min-w-0 flex-1">
+    <h3 class="font-semibold leading-snug text-white transition-colors group-hover:text-accent-fg">{{ .Title }}</h3>
+    {{ with .Params.summary }}
+      <p class="mt-1 text-sm leading-relaxed text-muted">{{ . }}</p>
+    {{ end }}
+    <div class="mt-4 flex items-center justify-between gap-3 text-sm">
+      {{ with .Params.price.start }}
+        <span class="text-muted">Mulai dari <span class="font-semibold text-ink tabular-nums">{{ . }}</span></span>
+      {{ end }}
+      <span class="ml-auto inline-flex items-center gap-1 font-medium text-accent-fg">
+        Detail
+        {{ partial "icon.html" (dict "name" "arrow-right" "class" "size-4 transition-transform group-hover:translate-x-0.5") }}
+      </span>
+    </div>
+  </div>
+</a>

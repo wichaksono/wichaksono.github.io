@@ -1,194 +1,114 @@
 {{ define "main" }}
-  <!-- Header Profil -->
-  <header class="text-center mb-8">
-      <img 
-          src="{{ .Site.Params.profile.photo }}" 
-          alt="{{ .Site.Params.profile.name }}" 
-          class="w-32 h-32 rounded-full mx-auto border-4 border-blue-500 shadow-xl mb-4 object-cover"
-      >
+{{- $profile := site.Params.profile }}
 
-      <h1 class="text-3xl font-extrabold text-white">
-          {{ .Site.Params.profile.name }}
-      </h1>
+<header class="text-center">
+  {{- with and $profile.photo (resources.Get $profile.photo) }}
+    {{- $img := .Fill "256x256 webp q85" }}
+    <img src="{{ $img.RelPermalink }}" width="128" height="128" alt="{{ $profile.name }}"
+         class="mx-auto size-32 rounded-full object-cover ring-4 ring-accent/50 ring-offset-4 ring-offset-canvas">
+  {{- else }}
+    {{- $initials := "" }}
+    {{- range first 2 (split $profile.name " ") }}{{ $initials = print $initials (substr . 0 1) }}{{ end }}
+    <div aria-hidden="true"
+         class="mx-auto grid size-32 place-items-center rounded-full bg-linear-to-br from-accent to-[#0b3d91] text-4xl font-bold tracking-tight text-white ring-4 ring-accent/40 ring-offset-4 ring-offset-canvas">
+      {{ $initials }}
+    </div>
+  {{- end }}
 
-     {{ with .Site.Params.profile.title }}
-      <p class="text-lg font-medium text-blue-400 mt-1 mb-3">
-        {{ . }}
-      </p>
-    {{ end }}
+  <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-white">{{ $profile.name }}</h1>
+  {{ with $profile.title }}
+    <p class="mx-auto mt-2 max-w-sm text-base font-medium text-balance text-accent-fg">{{ . }}</p>
+  {{ end }}
+  {{ with $profile.quote }}
+    <p class="mx-auto mt-3 max-w-sm text-sm text-muted italic">“{{ . }}”</p>
+  {{ end }}
+</header>
 
-    {{ with .Site.Params.profile.quote }}
-      <p class="text-sm italic text-gray-400 max-w-sm mx-auto">
-        "{{ . }}"
-      </p>
-    {{ end }}
-
-  </header>
-
-  <!-- Daftar Tautan Utama (Versi Ikon Saja) -->
-  <section class="flex flex-wrap justify-center gap-4" id="contact">
-    {{ range .Site.Params.links }}
-      <a 
-        href="{{ .url }}" 
-        {{ if .newtab }}target="_blank" rel="noopener noreferrer"{{ end }}
-        title="{{ .text }}"
-        class="flex items-center justify-center w-12 h-12 bg-gray-800 rounded-xl text-white shadow-md border-2 border-transparent transition hover:border-blue-500 hover:scale-110 active:scale-95"
-      >
-        <i data-lucide="{{ .icon }}" class="w-6 h-6 text-blue-400"></i>
+<ul id="contact" class="mt-6 flex flex-wrap justify-center gap-3" aria-label="Profil & kontak">
+  {{- range site.Params.links }}
+    <li>
+      <a href="{{ .url }}" aria-label="{{ .text }}" title="{{ .text }}"
+         {{ if .newtab }}target="_blank" rel="noopener noreferrer"{{ end }}
+         class="grid size-12 place-items-center rounded-xl border border-line bg-surface text-muted transition-colors hover:border-accent-fg/60 hover:bg-surface-raised hover:text-accent-fg">
+        {{ partial "icon.html" (dict "name" .icon "class" "size-5") }}
       </a>
-    {{ end }}
-  </section>
+    </li>
+  {{- end }}
+</ul>
 
-<!-- CTA Button -->
-<div class="mt-4 text-center">
+<div class="mt-6">
   {{ partial "cta-button.html" nil }}
 </div>
 
-  <!-- Section: Services -->
-  <section class="mt-12">
-    <div class="mb-8">
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
-          Layanan Saya
-        </h2>
-        <a href="/services/" 
-          class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition duration-200 whitespace-nowrap">
-          Lihat Semua
-          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-        </a>
-      </div>
+{{- $services := sort (where site.RegularPages "Section" "services") "Params.order" }}
+<section class="mt-14" aria-labelledby="services-title">
+  <h2 id="services-title" class="text-2xl font-bold text-white">Layanan Saya</h2>
+  <p class="mt-2 text-muted">
+    Pilih layanan WordPress sesuai kebutuhan Anda — mulai dari perbaikan, pembersihan, hingga pengembangan plugin custom.
+  </p>
 
-      <p class="text-gray-400 max-w-xl text-sm sm:text-base leading-relaxed">
-        Pilih layanan WordPress sesuai kebutuhan Anda — mulai dari perbaikan, pembersihan, hingga pengembangan plugin custom.
-      </p>
-    </div>
-    <div class="space-y-4 max-w-3xl mx-auto">
-      {{ range first 3 (sort (where .Site.RegularPages "Section" "services") ".Params.order" "asc") }}
-        <a href="{{ .RelPermalink }}" 
-          class="flex items-start gap-5 bg-gray-900 border border-gray-800 hover:border-blue-500 rounded-xl p-5 shadow-md hover:shadow-blue-900/20 transition">
-          
-          {{ with .Params.icon }}
-            <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-lg bg-blue-900/40 border border-blue-800 text-blue-400">
-              <i data-lucide="{{ . }}" class="w-5 h-5"></i>
-            </div>
-          {{ end }}
+  <ul class="mt-6 space-y-3">
+    {{- range first 3 $services }}
+      <li>{{ partial "service-card.html" . }}</li>
+    {{- end }}
+  </ul>
 
-          <div class="flex-1">
-            <h3 class="text-lg font-semibold text-blue-400 mb-1">
-              {{ .Title }}
-            </h3>
+  {{ with site.GetPage "/services" }}
+    <a href="{{ .RelPermalink }}"
+       class="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-line px-5 font-semibold text-accent-fg transition-colors hover:border-accent-fg/60 hover:bg-surface">
+      Lihat Semua Layanan ({{ len $services }})
+      {{ partial "icon.html" (dict "name" "arrow-right" "class" "size-4") }}
+    </a>
+  {{ end }}
+</section>
 
-            <p class="text-gray-400 text-sm leading-relaxed">
-              {{ .Params.summary }}
-            </p>
-
-            {{ with .Params.price.start }}
-              <p class="text-sm text-gray-300 text-end mt-6">
-                Start from <span class="font-semibold text-blue-400">{{ . }}</span>
-              </p>
-            {{ end }}
-          </div>
-        </a>
-      {{ end }}
-    </div>
-
-    <div class="mt-10 text-center">
-  <a
-    href="/services"
-    class="inline-flex items-center gap-2 px-7 py-3 rounded-xl border border-blue-500 text-blue-400 font-semibold transition hover:bg-blue-500/10 hover:text-blue-300"
-  >
-    Lihat Semua Layanan
-    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-  </a>
-</div>
-
-  </section>
-
-<!-- MY WORKS SECTION -->
-{{ with index .Site.Params.my_works 0 }}
+{{ with index site.Params.my_works 0 }}
   {{ if .active }}
-    <section class="max-w-3xl mx-auto mt-12">
-      <h2 class="text-3xl font-semibold text-white mb-2">
-        {{ .label }}
-      </h2>
-      <p class="text-gray-400 max-w-xl text-sm sm:text-base leading-relaxed mb-4">
-        {{ .description }}
-      </p>
+    <section class="mt-14" aria-labelledby="works-title">
+      <h2 id="works-title" class="text-2xl font-bold text-white">{{ .label }}</h2>
+      {{ with .description }}<p class="mt-2 text-muted">{{ . }}</p>{{ end }}
 
-      <div class="space-y-4">
-        {{ range .items }}
-          <a
-            href="{{ .url }}"
-            target="_blank"
-            rel="noopener"
-            class="flex items-start sm:items-center gap-5 bg-gray-900/60 border border-gray-800 rounded-xl px-5 py-5 hover:border-blue-500 transition"
-          >
-            {{ with .logo }}
-              <div class="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden bg-gray-800/60">
-                <img
-                  src="{{ . }}"
-                  alt="{{ $.Title }}"
-                  class="w-full h-full object-contain"
-                >
-              </div>
-            {{ end }}
-
-            <div class="flex-1">
-              <p class="text-white font-semibold text-base">
-                {{ .title }}
-              </p>
-              <p class="text-sm text-gray-400 leading-relaxed">
-                {{ .subtitle }}
-              </p>
-            </div>
-
-            <i data-lucide="arrow-right" class="hidden sm:inline-block w-4 h-4 text-blue-400"></i>
-          </a>
-        {{ end }}
-      </div>
+      <ul class="mt-6 space-y-3">
+        {{- range .items }}
+          <li>
+            <a href="{{ .url }}" target="_blank" rel="noopener"
+               class="group flex items-center gap-4 rounded-2xl border border-line bg-surface p-4 transition-colors hover:border-accent-fg/60 hover:bg-surface-raised">
+              {{- with .logo }}
+                {{- $src := . }}
+                {{- if not (hasPrefix . "http") }}{{ with resources.Get . }}{{ $src = (.Fit "112x112 webp").RelPermalink }}{{ end }}{{ end }}
+                <span class="grid size-14 shrink-0 place-items-center overflow-hidden rounded-xl bg-white p-2">
+                  <img src="{{ $src }}" width="40" height="40" alt="" loading="lazy" class="size-10 object-contain">
+                </span>
+              {{- end }}
+              <span class="min-w-0 flex-1">
+                <span class="block font-semibold text-white">{{ .title }}</span>
+                <span class="mt-0.5 block text-sm leading-relaxed text-muted">{{ .subtitle }}</span>
+              </span>
+              {{ partial "icon.html" (dict "name" "arrow-up-right" "class" "size-5 text-muted transition-colors group-hover:text-accent-fg") }}
+            </a>
+          </li>
+        {{- end }}
+      </ul>
     </section>
   {{ end }}
 {{ end }}
 
-
-
-<!-- PROMOTION SECTION -->
-{{ with index .Site.Params.promotions 0 }}
+{{ with index site.Params.promotions 0 }}
   {{ if .active }}
-    <section class="max-w-3xl mx-auto mt-12">
-      <h3 class="text-sm font-semibold text-center text-gray-400 tracking-wider mb-6">
-        {{ .label }}
-      </h3>
-
-      <div class="space-y-5">
-        {{ range .items }}
-          <a
-            href="{{ .url }}"
-            target="_blank"
-            rel="noopener"
-            class="group block bg-gray-900/60 border border-gray-800 rounded-2xl overflow-hidden transition hover:border-blue-400"
-          >
-            <!-- Banner -->
-            <div class="relative h-44 w-full overflow-hidden">
-              <img
-                src="{{ .banner }}"
-                alt="{{ .title }}"
-                class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
-              />
-
-              <!-- Hover Title -->
-              <div class="absolute inset-0 flex items-end bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition">
-                <p class="px-6 pb-4 text-white font-semibold text-lg">
-                  {{ .title }}
-                </p>
-              </div>
-            </div>
-          </a>
-        {{ end }}
-      </div>
+    <section class="mt-14">
+      <h2 class="text-center text-sm font-semibold tracking-wider text-muted uppercase">{{ .label }}</h2>
+      <ul class="mt-6 space-y-4">
+        {{- range .items }}
+          <li>
+            <a href="{{ .url }}" target="_blank" rel="noopener sponsored"
+               class="group block overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-accent-fg/60">
+              <img src="{{ .banner | relURL }}" alt="{{ .title }}" loading="lazy" class="aspect-[16/7] w-full object-cover">
+              <span class="block px-5 py-3 font-semibold text-white">{{ .title }}</span>
+            </a>
+          </li>
+        {{- end }}
+      </ul>
     </section>
   {{ end }}
 {{ end }}
-
-
 {{ end }}

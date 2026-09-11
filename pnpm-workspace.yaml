@@ -1,0 +1,8 @@
+allowBuilds:
+  '@parcel/watcher': false # only needed for tailwind --watch
+  hugo-extended: true # downloads the Hugo binary on install
+minimumReleaseAgeExclude:
+  - hugo-extended@0.166.0
+  - lucide-static@1.44.0
+# Real directories instead of symlinks: Hugo module mounts do not follow symlinks.
+nodeLinker: hoisted

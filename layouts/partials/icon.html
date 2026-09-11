@@ -1,0 +1,12 @@
+{{- /*
+  Inline Lucide SVG icon.
+  Usage: {{ partial "icon.html" (dict "name" "house" "class" "size-5") }}
+  Icons are decorative (aria-hidden); give the parent control its accessible name.
+*/ -}}
+{{- $class := .class | default "size-5" -}}
+{{- with resources.Get (printf "icons/%s.svg" .name) -}}
+  {{- $svg := .Content | replaceRE `<!--.*?-->` "" | replaceRE `\s+class="[^"]*"` "" | replaceRE `\s+` " " | strings.TrimSpace -}}
+  {{- replace $svg "<svg" (printf `<svg class="shrink-0 %s" aria-hidden="true" focusable="false"` $class) | safeHTML -}}
+{{- else -}}
+  {{- errorf "icon %q not found in assets/icons" .name -}}
+{{- end -}}

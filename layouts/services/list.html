@@ -1,49 +1,15 @@
 {{ define "main" }}
+{{ partial "page-header.html" . }}
 
-<header class="mb-12 border-b border-gray-700 pb-6">
-  {{ partial "breadcrumbs.html" . }}
+<ul class="space-y-3">
+  {{- range sort .Pages "Params.order" }}
+    <li>{{ partial "service-card.html" . }}</li>
+  {{- end }}
+</ul>
 
-  <h1 class="text-4xl font-extrabold text-white mb-2">{{ .Title }}</h1>
-  {{ with .Params.Summary }}
-    <p class="text-lg text-gray-400">{{ . }}</p>
-  {{ end }}
-</header>
-
-<!-- Daftar layanan -->
-<section class="mt-12 space-y-4 max-w-3xl mx-auto">
-  {{ range sort .Pages ".Params.order" "asc" }}
-  <a href="{{ .RelPermalink }}" 
-     class="group flex items-start bg-gray-900 border border-gray-800 hover:border-blue-500 rounded-xl p-5 sm:p-6 shadow-md hover:shadow-blue-900/20 transition duration-300">
-    
-    <!-- Ikon Layanan -->
-    {{ with .Params.icon }}
-      <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-blue-900/40 border border-blue-700 text-blue-400 mr-4 group-hover:bg-blue-800/50 group-hover:text-blue-300 transition duration-300">
-        <i data-lucide="{{ . }}" class="w-5 h-5"></i>
-      </div>
-    {{ end }}
-
-  <!-- Konten -->
-  <div class="flex-1">
-    <h3 class="text-lg font-bold text-blue-400 mb-1 group-hover:text-blue-300 transition">
-      {{ .Title }}
-    </h3>
-
-    {{ with .Params.summary }}
-      <p class="text-sm text-gray-400 leading-relaxed mb-2">{{ . }}</p>
-    {{ end }}
-
-    <div class="flex items-center justify-end mt-6">
-      {{ with .Params.price.start }}
-        <span class="text-sm font-medium text-blue-400">
-          <span class="text-white">Start from</span> <b>{{ . }}</b>
-        </span>
-      {{ end }}
-    </div>
-  </div>
-
-  </a>
-  {{ end }}
-</section>
-
-
+<div class="mt-10 rounded-2xl border border-line bg-surface p-6 text-center">
+  <h2 class="text-lg font-semibold text-white">Tidak menemukan yang Anda cari?</h2>
+  <p class="mt-1 text-sm text-muted">Ceritakan masalah website Anda, saya bantu cek dan beri estimasi.</p>
+  <div class="mt-5">{{ partial "cta-button.html" nil }}</div>
+</div>
 {{ end }}

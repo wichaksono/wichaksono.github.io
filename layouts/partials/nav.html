@@ -1,0 +1,20 @@
+{{- $current := .RelPermalink }}
+<nav aria-label="Navigasi utama" class="fixed inset-x-0 bottom-0 z-40 sm:bottom-4 sm:px-6">
+  <ul class="mx-auto flex max-w-xl justify-around border-t border-line bg-surface/95 px-2 pt-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] shadow-2xl shadow-black/50 backdrop-blur sm:justify-between sm:rounded-2xl sm:border sm:px-3 sm:py-2">
+    {{- range site.Params.floatingnav.items }}
+      {{- $external := hasPrefix .url "http" }}
+      {{- $path := strings.TrimSuffix "/" .url }}
+      {{- $active := and (not $external) (or (eq $current .url) (and $path (hasPrefix $current (print $path "/")))) }}
+      <li>
+        <a href="{{ .url }}"
+           {{ if $external }}target="_blank" rel="noopener noreferrer"{{ end }}
+           {{ if $active }}aria-current="page"{{ end }}
+           class="flex min-h-12 min-w-16 flex-col items-center justify-center gap-0.5 rounded-xl px-3 text-xs font-medium transition-colors sm:flex-row sm:gap-2 sm:text-sm
+                  {{ if $active }}bg-accent/15 text-accent-fg{{ else }}text-muted hover:bg-surface-raised hover:text-ink{{ end }}">
+          {{ partial "icon.html" (dict "name" .icon "class" "size-5") }}
+          <span>{{ .label }}</span>
+        </a>
+      </li>
+    {{- end }}
+  </ul>
+</nav>

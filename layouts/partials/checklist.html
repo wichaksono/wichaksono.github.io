@@ -1,0 +1,12 @@
+{{- /* Titled check list. Context: dict "title" string "items" (list of {text} maps or strings). */ -}}
+<section class="mt-12">
+  <h2 class="mb-4 text-xl font-bold text-white">{{ .title }}</h2>
+  <ul class="space-y-3 rounded-2xl border border-line bg-surface p-5">
+    {{- range .items }}
+      <li class="flex gap-3">
+        {{ partial "icon.html" (dict "name" "circle-check" "class" "mt-0.5 size-5 text-success") }}
+        <span class="leading-relaxed">{{ if reflect.IsMap . }}{{ .text }}{{ else }}{{ . }}{{ end }}</span>
+      </li>
+    {{- end }}
+  </ul>
+</section>

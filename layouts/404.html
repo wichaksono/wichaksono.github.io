@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="py-16 text-center">
+  <p class="text-sm font-semibold tracking-wider text-accent-fg uppercase">Error 404</p>
+  <h1 class="mt-3 text-3xl font-extrabold tracking-tight text-white">Halaman tidak ditemukan</h1>
+  <p class="mt-3 text-muted">Tautan yang Anda buka mungkin sudah dipindah atau dihapus.</p>
+  <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+    <a href="{{ site.Home.RelPermalink }}" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-accent px-6 font-semibold text-white transition-colors hover:bg-accent-hover">
+      {{ partial "icon.html" (dict "name" "house" "class" "size-5") }}
+      Ke Beranda
+    </a>
+    {{ with site.GetPage "/services" }}
+      <a href="{{ .RelPermalink }}" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-line px-6 font-semibold text-accent-fg transition-colors hover:bg-surface">
+        Lihat Layanan
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

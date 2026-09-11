@@ -1,0 +1,70 @@
+{{- $wa := site.Params.contact_whatsapp }}
+{{- $field := "w-full min-h-12 rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-base text-ink placeholder:text-muted focus:border-accent-fg focus:outline-none" }}
+<dialog id="contact-modal" aria-labelledby="contact-modal-title"
+        class="m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border border-line bg-surface p-0 text-ink shadow-2xl backdrop:bg-black/70">
+  <form id="wa-form" class="space-y-4 p-6">
+    <div class="flex items-start justify-between gap-4">
+      <h2 id="contact-modal-title" class="text-lg font-semibold text-white">Konsultasi via WhatsApp</h2>
+      <button type="button" data-close-contact aria-label="Tutup" class="-m-2 grid size-11 cursor-pointer place-items-center rounded-lg text-muted transition-colors hover:bg-surface-raised hover:text-ink">
+        {{ partial "icon.html" (dict "name" "x" "class" "size-5") }}
+      </button>
+    </div>
+
+    <div class="space-y-1.5">
+      <label for="wa-name" class="text-sm font-medium">{{ $wa.name_label | default "Nama" }}</label>
+      <input id="wa-name" type="text" autocomplete="name" required placeholder="{{ $wa.name_placeholder }}" class="{{ $field }}">
+    </div>
+
+    <div class="space-y-1.5">
+      <label for="wa-service" class="text-sm font-medium">{{ $wa.service_label | default "Layanan" }}</label>
+      <select id="wa-service" required class="{{ $field }}">
+        <option value="">Pilih layanan</option>
+        {{- range $wa.services }}
+        <option value="{{ . }}">{{ . }}</option>
+        {{- end }}
+      </select>
+    </div>
+
+    <div class="space-y-1.5">
+      <label for="wa-message" class="text-sm font-medium">{{ $wa.message_label | default "Pesan" }}</label>
+      <textarea id="wa-message" rows="4" required placeholder="{{ $wa.message_placeholder }}" class="{{ $field }}"></textarea>
+    </div>
+
+    <button type="submit" class="inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#1f883d] px-5 font-semibold text-white transition-colors hover:bg-[#1a7f37]">
+      {{ partial "icon.html" (dict "name" "send" "class" "size-4") }}
+      Kirim ke WhatsApp
+    </button>
+  </form>
+</dialog>
+
+<script>
+  (() => {
+    const modal = document.getElementById("contact-modal");
+    const form = document.getElementById("wa-form");
+    const phone = {{ $wa.number }};
+    const template = {{ $wa.message_template }};
+
+    document.querySelectorAll("[data-open-contact]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const selected = button.dataset.selectedService;
+        if (selected) form.querySelector("#wa-service").value = selected;
+        modal.showModal();
+      });
+    });
+
+    modal.querySelector("[data-close-contact]").addEventListener("click", () => modal.close());
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) modal.close();
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const text = template
+        .replaceAll("[[name]]", form.querySelector("#wa-name").value.trim())
+        .replaceAll("[[service]]", form.querySelector("#wa-service").value)
+        .replaceAll("[[message]]", form.querySelector("#wa-message").value.trim());
+      window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+      modal.close();
+    });
+  })();
+</script>

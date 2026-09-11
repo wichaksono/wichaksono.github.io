@@ -1,75 +1,84 @@
 {{ define "main" }}
-<header class="mb-12 border-b border-gray-700 pb-6">
-  {{ partial "breadcrumbs.html" . }}
+{{ partial "page-header.html" . }}
 
-  <h1 class="text-4xl font-extrabold text-white mb-3">{{ .Title }}</h1>
+<article class="prose-content">
+  {{ .Content }}
+</article>
 
-  {{ with .Params.summary }}
-    <p class="text-lg text-gray-400 max-w-2xl mx-auto">{{ . }}</p>
-  {{ end }}
-</header>
-
-<!-- Deskripsi utama -->
-<section class="mb-12 text-gray-300">
-
-  <article class="prose prose-invert max-w-none text-gray-300">
-    {{ .Content }}
-  </article>
-  
-</section>
-
-<!-- Bagian: Fitur -->
 {{ with .Params.features }}
-<section class="mb-12">
-  <h2 class="text-3xl font-bold text-white mb-6 border-l-4 border-blue-500 pl-3">
-    {{ $.Params.features_title }}
-  </h2>
-  <ul class="space-y-3 text-gray-300 bg-gray-900 p-6 rounded-xl border border-gray-800">
-    {{ range . }}
-        <li class="flex items-center">
-        <i data-lucide="circle-check" class="w-5 h-5 mr-3 text-blue-400 flex-shrink-0"></i>
-        <span>{{ .text }}</span>
-        </li>
-    {{ end }}
-    </ul>
-
-</section>
+  {{ partial "checklist.html" (dict "title" ($.Params.features_title | default "Yang Termasuk") "items" .) }}
 {{ end }}
 
-<!-- Bagian: Proses & Harga -->
-<section class="mb-5 grid grid-cols-1 gap-6">
-  <!-- Harga -->
-  {{ with .Params.price }}
-  <div class="p-6 bg-blue-900/50 rounded-xl border border-blue-800">
-    <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
-      <i data-lucide="dollar-sign" class="w-6 h-6 mr-3 text-blue-300"></i>
-      Harga & Garansi
-    </h3>
-    <p class="text-3xl font-extrabold text-white mb-4">
-      Mulai dari <span class="text-blue-300">{{ .start }}</span>
+{{ with .Params.benefits }}
+  {{ partial "checklist.html" (dict "title" ($.Params.benefits_title | default "Manfaat") "items" .) }}
+{{ end }}
+
+{{ with .Params.examples }}
+  {{ partial "checklist.html" (dict "title" ($.Params.examples_title | default "Contoh") "items" .) }}
+{{ end }}
+
+{{ with .Params.process }}
+  <section class="mt-12">
+    <h2 class="mb-5 text-xl font-bold text-white">{{ $.Params.process_title | default "Proses Pengerjaan" }}</h2>
+    <ol class="space-y-5">
+      {{- range $i, $step := . }}
+        {{- $parts := split $step " – " }}
+        <li class="flex gap-4">
+          <span class="grid size-8 shrink-0 place-items-center rounded-full border border-accent/50 bg-accent/10 text-sm font-semibold text-accent-fg tabular-nums">{{ add $i 1 }}</span>
+          <p class="pt-1 leading-relaxed">
+            {{- if gt (len $parts) 1 }}
+              <span class="font-semibold text-white">{{ index $parts 0 }}</span>
+              <span class="text-muted">— {{ delimit (after 1 $parts) " – " }}</span>
+            {{- else }}{{ $step }}{{ end -}}
+          </p>
+        </li>
+      {{- end }}
+    </ol>
+  </section>
+{{ end }}
+
+{{ with .Params.price }}
+  <section class="mt-12 rounded-2xl border border-accent/50 bg-linear-to-b from-accent/15 to-surface p-6" aria-labelledby="price-title">
+    <h2 id="price-title" class="text-sm font-semibold tracking-wider text-accent-fg uppercase">Harga & Garansi</h2>
+    <p class="mt-2 text-3xl font-extrabold tracking-tight text-white tabular-nums">
+      <span class="block text-base font-medium tracking-normal text-muted">Mulai dari</span>
+      {{ .start }}
     </p>
-    <p class="text-sm text-gray-200 italic mb-6">{{ .note }}</p>
+    {{ with .note }}<p class="mt-2 text-sm text-muted">{{ . }}</p>{{ end }}
 
     {{ with .warranty }}
-      <h4 class="font-semibold text-white mb-2">Garansi & Support:</h4>
-      <ul class="text-sm text-gray-200 space-y-1">
-        {{ range . }}
-          <li class="flex items-center">
-            <i data-lucide="check-circle" class="w-4 h-4 mr-2 text-green-400"></i>
-            {{ . }}
+      <h3 class="mt-6 text-sm font-semibold text-white">Garansi & Support</h3>
+      <ul class="mt-3 space-y-2 text-sm">
+        {{- range . }}
+          <li class="flex gap-2.5">
+            {{ partial "icon.html" (dict "name" "shield-check" "class" "mt-0.5 size-4 text-success") }}
+            <span>{{ . }}</span>
           </li>
-        {{ end }}
+        {{- end }}
       </ul>
     {{ end }}
-  </div>
-  {{ end }}
-</section>
 
-<!-- Footer -->
-   {{ with .Params.cta }}
-   <footer class="mt-4 text-center text-gray-500 text-sm">
-    {{ partial "cta-button.html" . }}
-   </footer>
-  {{ end }}
+    <div class="mt-6">
+      {{ partial "cta-button.html" (dict "text" ($.Params.cta.text | default "") "selected" ($.Params.cta.selected | default $.Title)) }}
+    </div>
+  </section>
+{{ end }}
 
+{{- $others := where (sort (where site.RegularPages "Section" "services") "Params.order") "RelPermalink" "ne" .RelPermalink }}
+{{ with $others }}
+  <section class="mt-14" aria-labelledby="others-title">
+    <h2 id="others-title" class="mb-4 text-xl font-bold text-white">Layanan Lainnya</h2>
+    <ul class="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface">
+      {{- range . }}
+        <li>
+          <a href="{{ .RelPermalink }}" class="group flex min-h-14 items-center gap-3 px-4 py-3 transition-colors hover:bg-surface-raised">
+            {{ with .Params.icon }}{{ partial "icon.html" (dict "name" . "class" "size-5 text-accent-fg") }}{{ end }}
+            <span class="flex-1 font-medium">{{ .Title }}</span>
+            {{ partial "icon.html" (dict "name" "chevron-right" "class" "size-4 text-muted transition-colors group-hover:text-accent-fg") }}
+          </a>
+        </li>
+      {{- end }}
+    </ul>
+  </section>
+{{ end }}
 {{ end }}

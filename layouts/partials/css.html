@@ -1,0 +1,8 @@
+{{- /* Tailwind output from `pnpm build` (assets/css/main.css -> assets/css/app.css). */ -}}
+{{- with resources.Get "css/app.css" -}}
+  {{- with . | fingerprint -}}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{- end -}}
+{{- else -}}
+  {{- errorf "assets/css/app.css is missing: build with `pnpm build`, not plain `hugo`" -}}
+{{- end -}}
