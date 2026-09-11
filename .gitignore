@@ -1,1 +1,14 @@
-public
+# Build output
+public/
+resources/_gen/
+assets/css/app.css
+.hugo_build.lock
+
+# graphify: graph output is tracked, its cache is not
+graphify-out/cache/
+
+# Dependencies
+node_modules/
+
+# OS noise
+.DS_Store
