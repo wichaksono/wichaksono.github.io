@@ -1,8 +1,0 @@
-[
-{{- $comma := "" -}}
-{{- range where .Site.RegularPages "Type" "blog" -}}
-  {{ $data := dict "title" .Title "url" .Permalink "summary" .Summary }}
-  {{ printf "%s%s" $comma ( jsonify $data ) }}
-  {{- $comma = ",\n" -}}
-{{- end -}}
-]
