@@ -1,0 +1,232 @@
+{
+  "package.json": {
+    "mtime": 1789093745.5341969,
+    "ast_hash": "e9a2f8f6e5a3e0f09aeeb38f9cfa6364",
+    "semantic_hash": ""
+  },
+  ".github/workflows/hugo.yml": {
+    "mtime": 1789093614.0222154,
+    "ast_hash": "0ae360c08e9e8c42ba837dee2c2f415e",
+    "semantic_hash": ""
+  },
+  "archetypes/default.md": {
+    "mtime": 1789092945.375562,
+    "ast_hash": "682e6424ef208c5bc0e3a81e16ea5c0a",
+    "semantic_hash": ""
+  },
+  "content/_index.md": {
+    "mtime": 1789092945.375838,
+    "ast_hash": "fcb7751bb9f28c0c4ab1a0d7e069d879",
+    "semantic_hash": ""
+  },
+  "content/about-me.md": {
+    "mtime": 1789093634.8053706,
+    "ast_hash": "3e6445497343b52fde14fe55c1d94973",
+    "semantic_hash": ""
+  },
+  "content/how-it-works.md": {
+    "mtime": 1789092945.375838,
+    "ast_hash": "0466bbd5c12b71f0790562d5387994e3",
+    "semantic_hash": ""
+  },
+  "content/services/_index.md": {
+    "mtime": 1789092945.375838,
+    "ast_hash": "79b6b1e89662e7919018168d2db2f33a",
+    "semantic_hash": ""
+  },
+  "content/services/custom-function.md": {
+    "mtime": 1789092945.3760371,
+    "ast_hash": "5b8274386de90e72c81a3d0e560998d5",
+    "semantic_hash": ""
+  },
+  "content/services/custom-plugin.md": {
+    "mtime": 1789092945.3760371,
+    "ast_hash": "92aa381a1bdc7de1e8ad58b4454de0d2",
+    "semantic_hash": ""
+  },
+  "content/services/fix-bugs.md": {
+    "mtime": 1789092945.3760371,
+    "ast_hash": "2c20cd42b11d0c78f60900bd9e04a927",
+    "semantic_hash": ""
+  },
+  "content/services/fix-error.md": {
+    "mtime": 1789092945.3812284,
+    "ast_hash": "8f704b9f1123188027d4dbc246519dec",
+    "semantic_hash": ""
+  },
+  "content/services/maintenance.md": {
+    "mtime": 1789092945.3812284,
+    "ast_hash": "053a58f6b48347d13ef70aa1b1526916",
+    "semantic_hash": ""
+  },
+  "content/services/remove-malware.md": {
+    "mtime": 1789092945.3812284,
+    "ast_hash": "f93459fb552d96d403c65ded91065757",
+    "semantic_hash": ""
+  },
+  "layouts/404.html": {
+    "mtime": 1789093665.4725993,
+    "ast_hash": "4fbb8cb0df0c8acb207eaf1fd5b2e492",
+    "semantic_hash": ""
+  },
+  "layouts/_default/baseof.html": {
+    "mtime": 1789093743.8311841,
+    "ast_hash": "448866992a8d8a543365e2f67b2de553",
+    "semantic_hash": ""
+  },
+  "layouts/_default/list.html": {
+    "mtime": 1789093579.5909584,
+    "ast_hash": "dafb4906917f9a461cf717c0ece2421e",
+    "semantic_hash": ""
+  },
+  "layouts/_default/single.html": {
+    "mtime": 1789093572.1049025,
+    "ast_hash": "5eb9043c2d991c5c406c4519fa89857c",
+    "semantic_hash": ""
+  },
+  "layouts/index.html": {
+    "mtime": 1789093570.841893,
+    "ast_hash": "4267da0df902f39d551350b3985e1e6e",
+    "semantic_hash": ""
+  },
+  "layouts/partials/breadcrumbs.html": {
+    "mtime": 1789093536.6206377,
+    "ast_hash": "67fb5d6329ea22965218fad9b2411bcb",
+    "semantic_hash": ""
+  },
+  "layouts/partials/checklist.html": {
+    "mtime": 1789093548.7677283,
+    "ast_hash": "6c090b3de9a1c8225b26f6856970aed8",
+    "semantic_hash": ""
+  },
+  "layouts/partials/contact-modal.html": {
+    "mtime": 1789093532.4456065,
+    "ast_hash": "b9655edff006350bcb052596d3a770f3",
+    "semantic_hash": ""
+  },
+  "layouts/partials/css.html": {
+    "mtime": 1789093740.5631597,
+    "ast_hash": "0eb9d62a4d087585c301fc2e2590b402",
+    "semantic_hash": ""
+  },
+  "layouts/partials/cta-button.html": {
+    "mtime": 1789093519.54151,
+    "ast_hash": "87717fc05abdce9ef3134bc66e14d250",
+    "semantic_hash": ""
+  },
+  "layouts/partials/dump.html": {
+    "mtime": 1789092945.382913,
+    "ast_hash": "90957a78b9e75ff28d74323e5dcc7749",
+    "semantic_hash": ""
+  },
+  "layouts/partials/footer.html": {
+    "mtime": 1789093506.8984158,
+    "ast_hash": "397d6bbd4f2d524a1adae9a0d96efeec",
+    "semantic_hash": ""
+  },
+  "layouts/partials/head.html": {
+    "mtime": 1789093742.177172,
+    "ast_hash": "50945d8e072b9b6b507d65f3dca2de0c",
+    "semantic_hash": ""
+  },
+  "layouts/partials/icon.html": {
+    "mtime": 1789093486.5242639,
+    "ast_hash": "580085d266d5625e708088028af02f57",
+    "semantic_hash": ""
+  },
+  "layouts/partials/nav.html": {
+    "mtime": 1789093513.6954665,
+    "ast_hash": "7e6f8dbef55c3734820bc29d0afd2568",
+    "semantic_hash": ""
+  },
+  "layouts/partials/page-header.html": {
+    "mtime": 1789093539.748661,
+    "ast_hash": "e28653e5272113b5a8b17571489cc719",
+    "semantic_hash": ""
+  },
+  "layouts/partials/service-card.html": {
+    "mtime": 1789093545.4857037,
+    "ast_hash": "09c4813712db2eb3ee3f9b8aef26147c",
+    "semantic_hash": ""
+  },
+  "layouts/services/list.html": {
+    "mtime": 1789093583.2349856,
+    "ast_hash": "494ee5a54b8841ff3b6be86182b1132c",
+    "semantic_hash": ""
+  },
+  "layouts/services/single.html": {
+    "mtime": 1789093598.0160959,
+    "ast_hash": "62607352be8f65906d964b8da46a2710",
+    "semantic_hash": ""
+  },
+  "layouts/shortcodes/banner.html": {
+    "mtime": 1789093631.7743478,
+    "ast_hash": "6d8b3a99abb83fa3c3e9b01f8aa649c1",
+    "semantic_hash": ""
+  },
+  "layouts/shortcodes/button.html": {
+    "mtime": 1789093633.1763582,
+    "ast_hash": "bd144f0139d59231fdb4cf657224b5a3",
+    "semantic_hash": ""
+  },
+  "pnpm-workspace.yaml": {
+    "mtime": 1789093730.391084,
+    "ast_hash": "cc77fe7a5a6be2818ecd47687cedb96e",
+    "semantic_hash": ""
+  },
+  "assets/icons/facebook.svg": {
+    "mtime": 1789093293.019877,
+    "ast_hash": "d49090dc516c3cffa681be5a377d590a",
+    "semantic_hash": ""
+  },
+  "assets/icons/github.svg": {
+    "mtime": 1789093293.2865624,
+    "ast_hash": "0bbbb511afebd100ac2acad9221a087f",
+    "semantic_hash": ""
+  },
+  "assets/icons/linkedin.svg": {
+    "mtime": 1789093293.4034028,
+    "ast_hash": "7a8d84bc568a2de65dc687e85108ca3d",
+    "semantic_hash": ""
+  },
+  "assets/icons/youtube.svg": {
+    "mtime": 1789093293.5133345,
+    "ast_hash": "4aa8e8a72c7cad4e71b28867ea1cef7f",
+    "semantic_hash": ""
+  },
+  "assets/images/github-mark.png": {
+    "mtime": 1789093293.630824,
+    "ast_hash": "bb04d77a846e6beca811c4be1d8e3442",
+    "semantic_hash": ""
+  },
+  "assets/images/neonwebid.png": {
+    "mtime": 1789093293.520227,
+    "ast_hash": "9fd84a5e5aef0c7b93f97d9ef2bbdd32",
+    "semantic_hash": ""
+  },
+  "static/favicon.svg": {
+    "mtime": 1789093609.8951845,
+    "ast_hash": "60d1dd5456a85f32d17599f7a8b8c4a3",
+    "semantic_hash": ""
+  },
+  "static/images/og-card.png": {
+    "mtime": 1789094339.1676338,
+    "ast_hash": "6966050a4d45d94ac1ea1c568039975a",
+    "semantic_hash": ""
+  },
+  "static/images/tools/theme-co-id-banner.jpg": {
+    "mtime": 1789092945.383899,
+    "ast_hash": "dc20e4357ae4b4cc2c42bfa980cb37d6",
+    "semantic_hash": ""
+  },
+  "static/images/tools/warna-host-banner.jpg": {
+    "mtime": 1789092945.383899,
+    "ast_hash": "f13386f7e2f52a7b56d65a65b8b03c5f",
+    "semantic_hash": ""
+  },
+  "assets/images/profile.jpg": {
+    "mtime": 1789094305.113739,
+    "ast_hash": "74fb0a80d80487d5957458f52126cc4d",
+    "semantic_hash": ""
+  }
+}

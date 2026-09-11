@@ -1,0 +1,19 @@
+{
+  "0": "how-it-works.md",
+  "1": "package.json",
+  "2": "about-me.md",
+  "3": "devDependencies",
+  "4": "hugo-extended",
+  "5": "lucide-static",
+  "6": "tailwindcss",
+  "7": "@tailwindcss/cli",
+  "8": "default.md",
+  "9": "content/_index.md",
+  "10": "custom-function.md",
+  "11": "custom-plugin.md",
+  "12": "fix-bugs.md",
+  "13": "fix-error.md",
+  "14": "services/_index.md",
+  "15": "maintenance.md",
+  "16": "remove-malware.md"
+}
