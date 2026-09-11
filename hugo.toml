@@ -78,11 +78,12 @@ disableKinds = ["taxonomy", "term"]
   url = "https://www.linkedin.com/in/wakhid-wicaksono-5514a369/"
   newtab = true
 
-[[params.links]]
-  icon = "youtube"
-  text = "YouTube"
-  url = "#"
-  newtab = true
+# YouTube is hidden until there is a channel URL (it pointed to "#").
+# [[params.links]]
+#   icon = "youtube"
+#   text = "YouTube"
+#   url = ""
+#   newtab = true
 
 [[params.links]]
   icon = "github"
@@ -108,14 +109,14 @@ disableKinds = ["taxonomy", "term"]
 [[params.my_works.items]]
   title = "Open-source & Free Resources"
   subtitle = "Kumpulan project dan eksperimen WordPress di GitHub"
-  logo = "https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"
+  logo = "images/github-mark.png"
   url = "https://github.com/wichaksono/"
 
 [[params.my_works.items]]
   title = "NeonWebID"
   subtitle = "Kontribusi artikel & tulisan teknis WordPress"
-  logo = "https://neon.web.id/wp-content/uploads/2023/09/cropped-neon-icon-blue.png"
-  url = "https://neon.web.id/author/wichaksonow/"
+  logo = "images/neonwebid.png"
+  url = "https://neon.web.id/author/wakhid-wicaksono/"
 
 # ======================
 #  Promotion section
